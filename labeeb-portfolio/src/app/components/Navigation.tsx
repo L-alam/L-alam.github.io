@@ -7,7 +7,7 @@ export default function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <nav className="w-full py-6 px-8 backdrop-blur-sm bg-black/10 border-b border-white/10 relative">
+    <nav className="w-full py-6 px-8 backdrop-blur-sm bg-black/ ">
       <div className="max-w-6xl mx-auto">
         <div className="hidden md:flex items-center justify-center space-x-12">
           <a href="#" className="text-white font-bold text-xl" onClick={() => setActiveItem('Labeeb Alam')}>
