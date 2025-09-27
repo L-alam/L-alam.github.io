@@ -24,3 +24,7 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.backdrop-blur-sm {
+  backdrop-filter: blur(4px);
+}
