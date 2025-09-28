@@ -1,11 +1,11 @@
-// pages/portfolio.tsx (or app/portfolio/page.tsx if using app router)
 "use client"
 
-import DarkVeil from '../components/DarkVeil';
-import Navigation from '../components/Navigation';
-import { ExternalLink, Github, ChevronDown } from "lucide-react"
+import DarkVeil from "../components/DarkVeil"
+import Navigation from "../components/Navigation"
+import { ExternalLink, Github } from "lucide-react"
 import { useState, useRef, useEffect } from "react"
 import Image from "next/image"
+import PortfolioStaggeredMenu from "../components/PortfolioStaggeredMenu"
 
 // Portfolio data structure
 const portfolioData = {
@@ -94,10 +94,46 @@ const portfolioData = {
         concurrent users with excellent performance metrics.`,
       photo: "/images/webapp-dashboard.jpg",
     },
+    {
+      id: "project-4",
+      title: "Full-Stack Web App",
+      company: "Modern Web Development",
+      time: null,
+      skillColor: "bg-purple-500/20",
+      skills: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
+      links: [
+        { label: "Code", url: "#", icon: Github },
+        { label: "Live Site", url: "#", icon: ExternalLink },
+      ],
+      description: `Created a comprehensive web application with user authentication, real-time features, 
+        and responsive design. Implemented modern development practices including TypeScript, 
+        automated testing, and CI/CD pipelines for seamless deployment and maintenance.
+        The application features a clean, intuitive interface and handles thousands of 
+        concurrent users with excellent performance metrics.`,
+      photo: "/images/webapp-dashboard.jpg",
+    },
+    {
+      id: "project-5",
+      title: "Full-Stack Web App",
+      company: "Modern Web Development",
+      time: null,
+      skillColor: "bg-purple-500/20",
+      skills: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
+      links: [
+        { label: "Code", url: "#", icon: Github },
+        { label: "Live Site", url: "#", icon: ExternalLink },
+      ],
+      description: `Created a comprehensive web application with user authentication, real-time features, 
+        and responsive design. Implemented modern development practices including TypeScript, 
+        automated testing, and CI/CD pipelines for seamless deployment and maintenance.
+        The application features a clean, intuitive interface and handles thousands of 
+        concurrent users with excellent performance metrics.`,
+      photo: "/images/webapp-dashboard.jpg",
+    },
   ],
 }
 
-const FolderGrid = ({ items, onFolderClick, expandedItem, folderRefs }) => {
+const FolderGrid = ({ items, onFolderClick, expandedItem, folderRefs, isMenuOpen }) => {
   const itemsPerRow = 5
   const rows = []
 
@@ -106,9 +142,12 @@ const FolderGrid = ({ items, onFolderClick, expandedItem, folderRefs }) => {
   }
 
   return (
-    <div className="space-y-12">
+    <div className="space-y-12 transition-all duration-500 ease-out">
       {rows.map((row, rowIndex) => (
-        <div key={rowIndex} className="grid grid-cols-5 gap-8 mx-8">
+        <div
+          key={rowIndex}
+          className={`grid grid-cols-5 mx-8 transition-all duration-500 ease-out ${isMenuOpen ? "gap-2" : "gap-8"}`}
+        >
           {row.map((item) => (
             <div key={item.id} className="flex flex-col items-center space-y-3">
               <div
@@ -129,13 +168,14 @@ const FolderGrid = ({ items, onFolderClick, expandedItem, folderRefs }) => {
                 <div className="w-16 h-16 relative">
                   <div className="absolute inset-0 bg-blue-500/20 rounded-lg blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse" />
                   <Image
-                    src="/images/folder_icon.jpg"
+                    src="/images/folder_icon.png"
                     alt="Folder"
                     width={64}
                     height={64}
                     className="drop-shadow-lg relative z-10 transition-all duration-300 group-hover:brightness-110"
                   />
                   <div className="absolute inset-0 bg-white/20 rounded-lg opacity-0 group-active:opacity-100 group-active:animate-ping" />
+                  <div className="absolute inset-0 bg-blue-400/30 rounded-lg opacity-0 group-active:opacity-100 group-active:animate-pulse" />
                 </div>
               </div>
               <div className="text-center max-w-[120px] transition-all duration-300 group-hover:scale-105">
@@ -145,7 +185,6 @@ const FolderGrid = ({ items, onFolderClick, expandedItem, folderRefs }) => {
               </div>
             </div>
           ))}
-          {/* Fill empty spots to maintain grid alignment */}
           {Array.from({ length: itemsPerRow - row.length }).map((_, index) => (
             <div key={`empty-${index}`} />
           ))}
@@ -155,181 +194,62 @@ const FolderGrid = ({ items, onFolderClick, expandedItem, folderRefs }) => {
   )
 }
 
-const ItemDetails = ({ item, onClose, isVisible, folderPosition }) => {
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    if (isVisible) {
-      setMounted(true)
-    }
-  }, [isVisible])
-
-  const skillColors = {
-    Django: "bg-green-500/20 text-green-300",
-    Python: "bg-green-500/20 text-green-300",
-    "Node.js": "bg-purple-500/20 text-purple-300",
-    Go: "bg-orange-500/20 text-orange-300",
-    React: "bg-cyan-500/20 text-cyan-300",
-    "Next.js": "bg-cyan-500/20 text-cyan-300",
-    TypeScript: "bg-cyan-500/20 text-cyan-300",
-    "Tailwind CSS": "bg-cyan-500/20 text-cyan-300",
-    Java: "bg-blue-500/20 text-blue-300",
-    SQL: "bg-blue-500/20 text-blue-300",
-    Docker: "bg-blue-500/20 text-blue-300",
-    Kubernetes: "bg-blue-500/20 text-blue-300",
-    Dynatrace: "bg-blue-500/20 text-blue-300",
-    Jira: "bg-blue-500/20 text-blue-300",
-    Elastic: "bg-blue-500/20 text-blue-300",
-    Siebel: "bg-blue-500/20 text-blue-300",
-    Monitoring: "bg-blue-500/20 text-blue-300",
-    "Data Analytics": "bg-green-500/20 text-green-300",
-    "Policy Analysis": "bg-green-500/20 text-green-300",
-    Pandas: "bg-green-500/20 text-green-300",
-    WebSocket: "bg-purple-500/20 text-purple-300",
-    Redis: "bg-red-500/20 text-red-300",
-    PostgreSQL: "bg-blue-500/20 text-blue-300",
-    "Apache Kafka": "bg-orange-500/20 text-orange-300",
-    default: "bg-gray-500/20 text-gray-300",
-  }
-
-  const getSkillColor = (skill) => {
-    return skillColors[skill] || skillColors["default"]
-  }
-
-  return (
-    <div
-      className={`overflow-hidden transition-all duration-700 ease-out ${
-        isVisible && mounted
-          ? "max-h-[1000px] opacity-100 transform translate-y-0 scale-100"
-          : "max-h-0 opacity-0 transform -translate-y-8 scale-95"
-      }`}
-    >
-      {isVisible && folderPosition && (
-        <div
-          className="absolute w-0.5 bg-gradient-to-b from-blue-400/60 to-transparent animate-pulse"
-          style={{
-            left: `${folderPosition.x + 32}px`,
-            top: `${folderPosition.y + 64}px`,
-            height: "60px",
-            transformOrigin: "top",
-            animation: "drawLine 0.5s ease-out forwards",
-          }}
-        />
-      )}
-
-      <div className="mt-8 mb-12 mx-8">
-        <div
-          className="rounded-xl overflow-hidden bg-gray-700/70 backdrop-blur-md border border-white/10 
-                        transform transition-all duration-500 hover:bg-gray-700/80 hover:border-white/20
-                        animate-in slide-in-from-top-4 fade-in"
-        >
-          {/* Header */}
-          <div className="bg-gray-900/70 backdrop-blur-md p-6 flex justify-between items-start">
-            <div>
-              <h3 className="text-2xl font-bold text-white mb-2 animate-in slide-in-from-left-4 fade-in duration-700">
-                {item.company}
-              </h3>
-              <p className="text-gray-300 font-medium text-lg animate-in slide-in-from-left-4 fade-in duration-700 delay-100">
-                {item.title}
-              </p>
-              {item.time && (
-                <p className="text-gray-400 text-sm mt-1 animate-in slide-in-from-left-4 fade-in duration-700 delay-200">
-                  {item.time}
-                </p>
-              )}
-            </div>
-            <button
-              onClick={onClose}
-              className="text-gray-400 hover:text-white transition-all duration-300 p-2 hover:bg-white/10 rounded-lg
-                         hover:scale-110 active:scale-95 transform"
-            >
-              <ChevronDown className="rotate-180 transition-transform duration-300 hover:rotate-[270deg]" size={24} />
-            </button>
-          </div>
-
-          {/* Content */}
-          <div className="p-6">
-            {/* Skills */}
-            <div className="flex flex-wrap gap-2 mb-6">
-              {item.skills.map((skill, index) => (
-                <span
-                  key={index}
-                  className={`px-3 py-1 rounded-full text-sm transition-all duration-300 hover:scale-105 hover:brightness-110 ${getSkillColor(skill)}
-                             animate-in slide-in-from-bottom-2 fade-in`}
-                  style={{ animationDelay: `${index * 50}ms` }}
-                >
-                  {skill}
-                </span>
-              ))}
-            </div>
-
-            {/* Links */}
-            <div className="flex space-x-4 mb-6">
-              {item.links.map((link, index) => {
-                const IconComponent = link.icon
-                return (
-                  <a
-                    key={index}
-                    href={link.url}
-                    className="flex items-center space-x-2 text-blue-400 hover:text-blue-300 transition-all duration-300 
-                               bg-blue-500/10 hover:bg-blue-500/20 px-4 py-2 rounded-lg hover:scale-105 active:scale-95
-                               animate-in slide-in-from-bottom-2 fade-in"
-                    style={{ animationDelay: `${(item.skills.length + index) * 50}ms` }}
-                  >
-                    <IconComponent size={18} className="transition-transform duration-300 hover:rotate-12" />
-                    <span>{link.label}</span>
-                  </a>
-                )
-              })}
-            </div>
-
-            {/* Description and Photo */}
-            {item.photo ? (
-              <div className="flex gap-6 animate-in slide-in-from-bottom-4 fade-in duration-700 delay-300">
-                <div className="w-2/5 flex-shrink-0">
-                  <img
-                    src={item.photo || "/placeholder.svg"}
-                    alt={`${item.title} preview`}
-                    className="w-full h-64 object-cover rounded-lg border border-white/10 transition-all duration-300 hover:scale-105 hover:border-white/20"
-                  />
-                </div>
-                <div className="flex-1">
-                  <p className="text-gray-300 leading-relaxed text-lg">{item.description}</p>
-                </div>
-              </div>
-            ) : (
-              <p className="text-gray-300 leading-relaxed text-lg animate-in slide-in-from-bottom-4 fade-in duration-700 delay-300">
-                {item.description}
-              </p>
-            )}
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
-
 export default function Portfolio() {
   const [expandedItem, setExpandedItem] = useState<string | null>(null)
-  const [folderPosition, setFolderPosition] = useState<{ x: number; y: number } | null>(null)
+  const [isTransitioning, setIsTransitioning] = useState(false)
+  const [nextItem, setNextItem] = useState<string | null>(null)
   const folderRefs = useRef({})
+  const menuRef = useRef<HTMLDivElement>(null)
 
   const handleFolderClick = (itemId: string) => {
-    const folderElement = folderRefs.current[itemId]
-    if (folderElement) {
-      const rect = folderElement.getBoundingClientRect()
-      setFolderPosition({
-        x: rect.left,
-        y: rect.top,
-      })
+    if (expandedItem === itemId) return
+
+    if (expandedItem && expandedItem !== itemId) {
+      setIsTransitioning(true)
+      setNextItem(itemId)
+      setTimeout(() => {
+        setExpandedItem(itemId)
+        setNextItem(null)
+        setIsTransitioning(false)
+      }, 300)
+    } else {
+      setExpandedItem(itemId)
+    }
+  }
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (expandedItem && menuRef.current) {
+        const clickedFolder = Object.values(folderRefs.current).find(
+          (folder) => folder && folder.contains(event.target as Node),
+        )
+
+        if (clickedFolder) {
+          return
+        }
+
+        const menuPanel = menuRef.current.querySelector('[data-menu-panel="true"]')
+        if (menuPanel && menuPanel.contains(event.target as Node)) {
+          return
+        }
+
+        handleCloseDetails()
+      }
     }
 
-    setExpandedItem(expandedItem === itemId ? null : itemId)
-  }
+    if (expandedItem) {
+      document.addEventListener("mousedown", handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside)
+    }
+  }, [expandedItem])
 
   const handleCloseDetails = () => {
     setExpandedItem(null)
-    setFolderPosition(null)
+    setIsTransitioning(false)
+    setNextItem(null)
   }
 
   const getExpandedItemData = () => {
@@ -343,7 +263,6 @@ export default function Portfolio() {
 
   return (
     <div className="min-h-screen relative">
-      {/* Same background */}
       <div className="fixed inset-0 z-0">
         <DarkVeil
           hueShift={50}
@@ -355,12 +274,10 @@ export default function Portfolio() {
         />
       </div>
 
-      {/* Content overlay */}
       <div className="relative z-10">
         <Navigation />
 
         <main className="max-w-6xl mx-auto px-4 py-12">
-          {/* Experience Section */}
           <section className="mb-20">
             <div className="mb-12 mx-8">
               <h2 className="text-3xl font-bold text-white mb-4">Experience:</h2>
@@ -371,20 +288,10 @@ export default function Portfolio() {
               onFolderClick={handleFolderClick}
               expandedItem={expandedItem}
               folderRefs={folderRefs}
+              isMenuOpen={!!expandedItem}
             />
-
-            {/* Expanded Experience Details */}
-            {expandedItem && portfolioData.experiences.find((item) => item.id === expandedItem) && (
-              <ItemDetails
-                item={expandedItemData}
-                onClose={handleCloseDetails}
-                isVisible={true}
-                folderPosition={folderPosition}
-              />
-            )}
           </section>
 
-          {/* Projects Section */}
           <section className="mb-20">
             <div className="mb-12 mx-8">
               <h2 className="text-3xl font-bold text-white mb-4">Projects:</h2>
@@ -395,31 +302,26 @@ export default function Portfolio() {
               onFolderClick={handleFolderClick}
               expandedItem={expandedItem}
               folderRefs={folderRefs}
+              isMenuOpen={!!expandedItem}
             />
-
-            {/* Expanded Project Details */}
-            {expandedItem && portfolioData.projects.find((item) => item.id === expandedItem) && (
-              <ItemDetails
-                item={expandedItemData}
-                onClose={handleCloseDetails}
-                isVisible={true}
-                folderPosition={folderPosition}
-              />
-            )}
           </section>
         </main>
       </div>
 
-      <style jsx>{`
-        @keyframes drawLine {
-          from {
-            transform: scaleY(0);
-          }
-          to {
-            transform: scaleY(1);
-          }
-        }
-      `}</style>
+      {expandedItemData && (
+        <div ref={menuRef} className="fixed inset-0 z-40 pointer-events-none">
+          <PortfolioStaggeredMenu
+            key={expandedItem}
+            position="right"
+            itemData={expandedItemData}
+            colors={["#B19EEF", "#5227FF"]}
+            accentColor="#5227FF"
+            onMenuClose={handleCloseDetails}
+            autoOpen={true}
+            isTransitioning={isTransitioning}
+          />
+        </div>
+      )}
     </div>
   )
 }
