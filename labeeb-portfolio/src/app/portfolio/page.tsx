@@ -3,7 +3,8 @@
 
 import DarkVeil from '../components/DarkVeil';
 import Navigation from '../components/Navigation';
-import { ExternalLink, Github, ChevronRight, ChevronDown } from 'lucide-react';
+import Folder from '../components/Folder';
+import { ExternalLink, Github, ChevronDown } from 'lucide-react';
 import { useState } from 'react';
 
 // Portfolio data structure
@@ -11,11 +12,11 @@ const portfolioData = {
   experiences: [
     {
       id: 'experience-1',
-      title: 'Software Engineer Intern',
+      title: 'Software Engineer Intern', 
       company: 'Hyundai Autoever America',
-      time: 'Summer 2024',
+      time: 'June 2024 - September 2024',
       skillColor: "bg-blue-500/20",
-      skills: ['Java', 'Distributed Systems', 'Vehicle Connectivity', 'Performance Optimization'],
+      skills: ['Django', 'Dynatrace', 'SQL', 'Jira', 'Elastic', 'Siebel', 'Monitoring'],
       links: [
         { label: 'Company Site', url: '#', icon: ExternalLink }
       ],
@@ -25,7 +26,8 @@ const portfolioData = {
         with cross-functional teams to implement scalable solutions for vehicle telemetry 
         and diagnostics. This role gave me extensive experience with enterprise-level Java applications 
         and real-time data processing at scale.`,
-      photo: '/images/hyundai-office.jpg' // optional photo
+      photo: '/images/hyundai-office.png',
+      folderColor: '#3B82F6' // Blue
     },
     {
       id: 'experience-2',
@@ -42,7 +44,8 @@ const portfolioData = {
         decision-making and policy development initiatives affecting Massachusetts constituents.
         Worked directly with legislative staff to translate complex data into actionable insights 
         for policy makers.`,
-      photo: null // no photo for this one
+      photo: null,
+      folderColor: '#10B981' // Green
     }
   ],
   projects: [
@@ -62,7 +65,8 @@ const portfolioData = {
         and low-latency gameplay experiences with support for 10,000+ concurrent players.
         Implemented sophisticated matchmaking algorithms and real-time synchronization 
         to ensure smooth gameplay across different devices and network conditions.`,
-      photo: '/images/game-architecture.png'
+      photo: '/images/game-architecture.png',
+      folderColor: '#8B5CF6' // Purple
     },
     {
       id: 'project-2',
@@ -79,7 +83,8 @@ const portfolioData = {
         to handle varying computational workloads efficiently across cloud infrastructure.
         The system can dynamically allocate resources based on workload demands and 
         automatically recover from node failures without data loss.`,
-      photo: null
+      photo: null,
+      folderColor: '#F59E0B' // Orange
     },
     {
       id: 'project-3',
@@ -97,15 +102,62 @@ const portfolioData = {
         automated testing, and CI/CD pipelines for seamless deployment and maintenance.
         The application features a clean, intuitive interface and handles thousands of 
         concurrent users with excellent performance metrics.`,
-      photo: '/images/webapp-dashboard.jpg'
+      photo: '/images/webapp-dashboard.jpg',
+      folderColor: '#EF4444' // Red
     }
   ]
 };
 
-// Reusable TimelineItem Component
-const TimelineItem = ({ item, isExpanded, onToggle }) => {
+// Folder Grid Component that handles responsive rows
+const FolderGrid = ({ items, onFolderClick, expandedItem }) => {
+  const itemsPerRow = 5;
+  const rows = [];
+  
+  for (let i = 0; i < items.length; i += itemsPerRow) {
+    rows.push(items.slice(i, i + itemsPerRow));
+  }
+
+  return (
+    <div className="space-y-16">
+      {rows.map((row, rowIndex) => (
+        <div key={rowIndex} className="flex justify-center space-x-8">
+          {row.map((item) => (
+            <div key={item.id} className="flex flex-col items-center space-y-4">
+              <div 
+                className="cursor-pointer transform transition-transform hover:scale-105"
+                onClick={() => onFolderClick(item.id)}
+              >
+                <Folder 
+                  size={1.5} 
+                  color={item.folderColor}
+                  className="drop-shadow-lg"
+                />
+              </div>
+              <div className="text-center max-w-[140px]">
+                <h3 className="text-white font-semibold text-sm leading-tight mb-1">
+                  {item.company}
+                </h3>
+                <p className="text-gray-300 text-xs leading-tight">
+                  {item.title}
+                </p>
+                {item.time && (
+                  <p className="text-gray-400 text-xs mt-1">
+                    {item.time}
+                  </p>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+  );
+};
+
+// Expanded Item Details Component
+const ItemDetails = ({ item, onClose }) => {
   const skillColors = {
-    'Java': 'bg-blue-500/20 text-blue-300',
+    'Django': 'bg-green-500/20 text-green-300',
     'Python': 'bg-green-500/20 text-green-300',
     'Node.js': 'bg-purple-500/20 text-purple-300',
     'Go': 'bg-orange-500/20 text-orange-300',
@@ -113,7 +165,10 @@ const TimelineItem = ({ item, isExpanded, onToggle }) => {
     'Next.js': 'bg-cyan-500/20 text-cyan-300',
     'TypeScript': 'bg-cyan-500/20 text-cyan-300',
     'Tailwind CSS': 'bg-cyan-500/20 text-cyan-300',
-    // Default fallback
+    'Java': 'bg-blue-500/20 text-blue-300',
+    'SQL': 'bg-blue-500/20 text-blue-300',
+    'Docker': 'bg-blue-500/20 text-blue-300',
+    'Kubernetes': 'bg-blue-500/20 text-blue-300',
     'default': 'bg-gray-500/20 text-gray-300'
   };
 
@@ -121,95 +176,75 @@ const TimelineItem = ({ item, isExpanded, onToggle }) => {
     return skillColors[skill] || skillColors['default'];
   };
 
-
   return (
-    <div className="relative mb-12">
-      {/* Timeline Dot - White */}
-      <div className="absolute left-6 w-4 h-4 bg-white rounded-full"></div>
-      
-      {/* Card */}
-      <div className="ml-20">
+    <div className="mt-8 mb-12">
+      <div className="max-w-4xl mx-auto">
         <div className="rounded-xl overflow-hidden bg-gray-700/70 backdrop-blur-md border border-white/10">
-          <div className="flex">
-            {/* Left side - 40% */}
-            <div className="w-2/5 bg-gray-900/70 backdrop-blur-md p-6 flex flex-col justify-center">
-              <h3 className="text-xl font-bold text-white mb-1">{item.title}</h3>
-              <p className="text-gray-300 font-medium text-sm">{item.company}</p>
-              {item.time && <p className="text-gray-400 text-xs mt-1">{item.time}</p>}
+          {/* Header */}
+          <div className="bg-gray-900/70 backdrop-blur-md p-6 flex justify-between items-start">
+            <div>
+              <h3 className="text-2xl font-bold text-white mb-2">{item.company}</h3>
+              <p className="text-gray-300 font-medium text-lg">{item.title}</p>
+              {item.time && <p className="text-gray-400 text-sm mt-1">{item.time}</p>}
             </div>
-            
-            {/* Right side - 60% */}
-            <div className="w-3/5 p-6 flex items-center justify-between">
-              <div className="flex-1">
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {item.skills.map((skill, index) => (
-                    <span key={index} className={`px-3 py-1 rounded-full text-sm ${item.skillColor}`}>
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-                <div className="flex space-x-3">
-                  {item.links.map((link, index) => {
-                    const IconComponent = link.icon;
-                    return (
-                      <a 
-                        key={index}
-                        href={link.url} 
-                        className="flex items-center space-x-1 text-blue-400 hover:text-blue-300 transition-colors"
-                      >
-                        <IconComponent size={16} />
-                        <span className="text-sm">{link.label}</span>
-                      </a>
-                    );
-                  })}
-                </div>
-              </div>
-              
-              {/* Dropdown Arrow - Right side */}
-              <div className="ml-4">
-                <button 
-                  onClick={() => onToggle(item.id)}
-                  className="text-gray-400 hover:text-white transition-colors p-2"
-                >
-                  {isExpanded ? 
-                    <ChevronDown size={20} /> : 
-                    <ChevronRight size={20} />
-                  }
-                </button>
-              </div>
-            </div>
+            <button 
+              onClick={onClose}
+              className="text-gray-400 hover:text-white transition-colors p-2"
+            >
+              <ChevronDown className="rotate-180" size={24} />
+            </button>
           </div>
           
-          {/* Expandable Content */}
-          {isExpanded && (
-            <div className="px-6 pb-6 border-t border-white/10">
-              <div className="pt-4">
-                {item.photo ? (
-                  <div className="flex gap-6">
-                    {/* Photo - 1/3 of dropdown width */}
-                    <div className="w-1/3 flex-shrink-0">
-                      <img 
-                        src={item.photo} 
-                        alt={`${item.title} preview`}
-                        className="w-full h-48 object-cover rounded-lg border border-white/10"
-                      />
-                    </div>
-                    {/* Description - 2/3 of dropdown width */}
-                    <div className="flex-1">
-                      <p className="text-gray-300 leading-relaxed">
-                        {item.description}
-                      </p>
-                    </div>
-                  </div>
-                ) : (
-                  /* No photo - full width description */
-                  <p className="text-gray-300 leading-relaxed">
+          {/* Content */}
+          <div className="p-6">
+            {/* Skills */}
+            <div className="flex flex-wrap gap-2 mb-6">
+              {item.skills.map((skill, index) => (
+                <span key={index} className={`px-3 py-1 rounded-full text-sm ${getSkillColor(skill)}`}>
+                  {skill}
+                </span>
+              ))}
+            </div>
+            
+            {/* Links */}
+            <div className="flex space-x-4 mb-6">
+              {item.links.map((link, index) => {
+                const IconComponent = link.icon;
+                return (
+                  <a 
+                    key={index}
+                    href={link.url} 
+                    className="flex items-center space-x-2 text-blue-400 hover:text-blue-300 transition-colors bg-blue-500/10 hover:bg-blue-500/20 px-4 py-2 rounded-lg"
+                  >
+                    <IconComponent size={18} />
+                    <span>{link.label}</span>
+                  </a>
+                );
+              })}
+            </div>
+            
+            {/* Description and Photo */}
+            {item.photo ? (
+              <div className="flex gap-6">
+                <div className="w-2/5 flex-shrink-0">
+                  <img 
+                    src={item.photo} 
+                    alt={`${item.title} preview`}
+                    className="w-full h-64 object-cover rounded-lg border border-white/10"
+                  />
+                </div>
+                <div className="flex-1">
+                  <p className="text-gray-300 leading-relaxed text-lg">
                     {item.description}
                   </p>
-                )}
+                </div>
               </div>
-            </div>
-          )}
+            ) : (
+              <p className="text-gray-300 leading-relaxed text-lg">
+                {item.description}
+              </p>
+            )}
+          </div>
         </div>
       </div>
     </div>
@@ -217,11 +252,24 @@ const TimelineItem = ({ item, isExpanded, onToggle }) => {
 };
 
 export default function Portfolio() {
-  const [expandedCard, setExpandedCard] = useState<string | null>(null);
+  const [expandedItem, setExpandedItem] = useState<string | null>(null);
 
-  const toggleCard = (cardId: string) => {
-    setExpandedCard(expandedCard === cardId ? null : cardId);
+  const handleFolderClick = (itemId: string) => {
+    setExpandedItem(expandedItem === itemId ? null : itemId);
   };
+
+  const handleCloseDetails = () => {
+    setExpandedItem(null);
+  };
+
+  const getExpandedItemData = () => {
+    if (!expandedItem) return null;
+    
+    const allItems = [...portfolioData.experiences, ...portfolioData.projects];
+    return allItems.find(item => item.id === expandedItem);
+  };
+
+  const expandedItemData = getExpandedItemData();
 
   return (
     <div className="min-h-screen relative">
@@ -242,58 +290,46 @@ export default function Portfolio() {
         <Navigation />
         
         <main className="container mx-auto px-8 py-12">
-          <div className="max-w-4xl mx-auto">
+
+          {/* Experience Section */}
+          <section className="mb-20">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-white mb-4">Experience</h2>
+              <p className="text-gray-300">
+                Professional roles and internships that shaped my career
+              </p>
+            </div>
             
-            {/* Experience Container */}
-            <div className="relative">
-              {/* Vertical Timeline Line - White */}
-              <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-white/50"></div>
-              
-              {/* Experience Section */}
-              <div className="mb-16">
-                <h2 className="text-3xl font-bold text-white mb-8 ml-20">Experience</h2>
-                
-                {portfolioData.experiences.map((experience) => (
-                  <TimelineItem
-                    key={experience.id}
-                    item={experience}
-                    isExpanded={expandedCard === experience.id}
-                    onToggle={toggleCard}
-                  />
-                ))}
-              </div>
-            </div>
+            <FolderGrid 
+              items={portfolioData.experiences}
+              onFolderClick={handleFolderClick}
+              expandedItem={expandedItem}
+            />
+          </section>
 
-            {/* Projects Container */}
-            <div className="relative">
-              {/* Vertical Timeline Line - White */}
-              <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-white/50"></div>
-
-              {/* Projects Section */}
-              <div className="mb-16">
-                <h2 className="text-3xl font-bold text-white mb-8 ml-20">Projects</h2>
-                
-                {portfolioData.projects.map((project) => (
-                  <TimelineItem
-                    key={project.id}
-                    item={project}
-                    isExpanded={expandedCard === project.id}
-                    onToggle={toggleCard}
-                  />
-                ))}
-              </div>
+          {/* Projects Section */}
+          <section className="mb-20">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-white mb-4">Projects</h2>
+              <p className="text-gray-300">
+                Personal and collaborative projects demonstrating technical skills
+              </p>
             </div>
+            
+            <FolderGrid 
+              items={portfolioData.projects}
+              onFolderClick={handleFolderClick}
+              expandedItem={expandedItem}
+            />
+          </section>
 
-            {/* Back to Home Link */}
-            <div className="text-center mt-12">
-              <a 
-                href="/" 
-                className="text-gray-400 text-lg font-medium hover:text-gray-300 transition-colors duration-300"
-              >
-                &lt; Back to Home
-              </a>
-            </div>
-          </div>
+          {/* Expanded Item Details */}
+          {expandedItemData && (
+            <ItemDetails 
+              item={expandedItemData}
+              onClose={handleCloseDetails}
+            />
+          )}
         </main>
       </div>
     </div>
