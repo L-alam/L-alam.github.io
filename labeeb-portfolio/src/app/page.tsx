@@ -4,6 +4,7 @@ import Navigation from './components/Navigation';
 import Image from 'next/image';
 import TextType from './components/TextType';
 import { Github, Linkedin, FileText } from 'lucide-react';
+import Link from 'next/link';
 
 export default function HomePage() {
   return (
@@ -56,6 +57,8 @@ export default function HomePage() {
                   cursorCharacter="|"
                   className="text-xl text-gray-300"
                 />
+
+                
                 {/* Social Icons */}
                 <div className="flex items-center space-x-4 mt-8">
                   {/* Resume Button - Largest */}
@@ -98,7 +101,7 @@ export default function HomePage() {
               <div className="flex-1">
                 <h2 className="text-xl font-bold text-gray-300 mb-4 inline-block border-b-2 border-white/30 pb-2">About Me</h2>
                 <div className="bg-transparent">
-                  <p className="text-md text-gray-400 leading-relaxed">
+                  <p className="text-md text-gray-400 leading-relaxed pb-10">
                     Hey, I'm Labeeb! I'm a computer science student at Boston University with experience 
                     across full-stack development, mobile applications, and distributed systems. I've had the opportunity to work 
                     at Hyundai Autoever America optimizing support systems for connected vehicles, and with Senator Ed Markey's 
@@ -111,6 +114,16 @@ export default function HomePage() {
               {/* Right spacer */}
               <div className="w-1 md:w-2 flex-shrink-0"></div>
             </div>
+
+            <div className="mt-8">
+              <Link 
+                href="/portfolio" 
+                className="text-gray-400 text-lg font-medium hover:text-gray-300 transition-colors duration-300 "
+              >
+                Portfolio &gt;
+              </Link>
+            </div>
+
           </div>
         </main>
       </div>
