@@ -12,8 +12,8 @@ const portfolioData = {
   experiences: [
     {
       id: "experience-1",
-      title: "Software Engineer Intern",
-      company: "Hyundai Autoever America",
+      title: "SWE Intern",
+      company: "Hyundai AutoEver America",
       time: "June 2024 - September 2024",
       skillColor: "bg-blue-500/20",
       skills: ["Django", "Dynatrace", "SQL", "Jira", "Elastic", "Siebel", "Monitoring"],
@@ -28,7 +28,7 @@ const portfolioData = {
     },
     {
       id: "experience-2",
-      title: "Data Analyst Intern",
+      title: "Team Lead",
       company: "Senator Ed Markey's Office",
       time: "2023",
       skillColor: "bg-blue-500/20",
@@ -123,29 +123,28 @@ const FolderGrid = ({ items, onFolderClick, expandedItem, folderRefs, isMenuOpen
                   group relative`}
                 onClick={() => onFolderClick(item.id)}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.filter = "drop-shadow(0 0 20px rgba(59, 130, 246, 0.3))"
+                  e.currentTarget.style.filter = "drop-shadow(0 0 20px rgba(82, 39, 255, 0.3))"
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.filter = ""
                 }}
               >
-                <div className="w-16 h-16 relative">
-                  <div className="absolute inset-0 bg-blue-500/20 rounded-lg blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse" />
+                <div className="w-20 h-20 relative">
+                  <div className="absolute inset-0 bg-[#DEE6DE]/20 rounded-lg blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse" />
                   <Image
-                    src="/images/folder_icon.png"
+                    src="/images/folder-icon-white.png"
                     alt="Folder"
-                    width={64}
-                    height={64}
+                    width={80}
+                    height={80}
                     className="drop-shadow-lg relative z-10 transition-all duration-300 group-hover:brightness-110"
                   />
                   <div className="absolute inset-0 bg-white/20 rounded-lg opacity-0 group-active:opacity-100 group-active:animate-ping" />
-                  <div className="absolute inset-0 bg-blue-400/30 rounded-lg opacity-0 group-active:opacity-100 group-active:animate-pulse" />
+                  <div className="absolute inset-0 bg-[#DEE6DE]/30 rounded-lg opacity-0 group-active:opacity-100 group-active:animate-pulse" />
                 </div>
               </div>
-              <div className="text-center max-w-[120px] transition-all duration-300 group-hover:scale-105">
-                <h3 className="text-white font-semibold text-sm leading-tight mb-1 truncate">{item.company}</h3>
-                <p className="text-gray-300 text-xs leading-tight line-clamp-2">{item.title}</p>
-                {item.time && <p className="text-gray-400 text-xs mt-1">{item.time}</p>}
+              <div className="text-center max-w-[160px] transition-all duration-300 group-hover:scale-105">
+                <h3 className="text-white font-semibold text-lg leading-tight mb-1 break-words">{item.company}</h3>
+                <p className="text-gray-100 text-xs mt-2 text-base leading-tight break-words">{item.time}</p>
               </div>
             </div>
           ))}
@@ -277,8 +276,8 @@ export default function Portfolio() {
             key={expandedItem}
             position="right"
             itemData={expandedItemData}
-            colors={["#B19EEF", "#5227FF"]}
-            accentColor="#5227FF"
+            colors={["#CBF7ED", "#174F4F"]}
+            accentColor="#174F4F"
             onMenuClose={handleCloseDetails}
             autoOpen={true}
             isTransitioning={isTransitioning}
