@@ -10,16 +10,8 @@ export default function HomePage() {
   return (
     <div className="min-h-screen relative">
       {/* Background - fixed and full screen */}
-      <div className="fixed inset-0 z-0">
-        <DarkVeil 
-          hueShift={50}
-          noiseIntensity={0.03}
-          scanlineIntensity={0.15}
-          speed={0.5}
-          scanlineFrequency={0.8}
-          warpAmount={0.1}
-        />
-      </div>
+
+      <div className="fixed inset-0 z-0 bg-[#297373]"></div>
       
       {/* Content overlay */}
       <div className="relative z-10">
@@ -101,7 +93,7 @@ export default function HomePage() {
               <div className="flex-1">
                 <h2 className="text-xl font-bold text-gray-300 mb-4 inline-block border-b-2 border-white/30 pb-2">About Me</h2>
                 <div className="bg-transparent">
-                  <p className="text-md text-gray-400 leading-relaxed pb-10">
+                  <p className="text-md text-white-400 leading-relaxed pb-10">
                     Hey, I'm Labeeb! I'm a computer science student at Boston University with experience 
                     across full-stack development, mobile applications, and distributed systems. I've had the opportunity to work 
                     at Hyundai Autoever America optimizing support systems for connected vehicles, and with Senator Ed Markey's 
@@ -118,7 +110,7 @@ export default function HomePage() {
             <div className="mt-8">
               <Link 
                 href="/portfolio" 
-                className="text-gray-400 text-lg font-medium hover:text-gray-300 transition-colors duration-300 "
+                className="text-white-400 text-lg font-medium hover:text-gray-300 transition-colors duration-300 "
               >
                 Portfolio &gt;
               </Link>

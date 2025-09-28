@@ -39,7 +39,7 @@ const portfolioData = {
         decision-making and policy development initiatives affecting Massachusetts constituents.
         Worked directly with legislative staff to translate complex data into actionable insights 
         for policy makers.`,
-      photo: null,
+      photo: "/images/hyundai-office.png",
     },
   ],
   projects: [
@@ -59,7 +59,7 @@ const portfolioData = {
         and low-latency gameplay experiences with support for 10,000+ concurrent players.
         Implemented sophisticated matchmaking algorithms and real-time synchronization 
         to ensure smooth gameplay across different devices and network conditions.`,
-      photo: "/images/game-architecture.png",
+      photo: "/images/hyundai-office.png",
     },
     {
       id: "project-2",
@@ -78,42 +78,6 @@ const portfolioData = {
     },
     {
       id: "project-3",
-      title: "Full-Stack Web App",
-      company: "Modern Web Development",
-      time: null,
-      skillColor: "bg-purple-500/20",
-      skills: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
-      links: [
-        { label: "Code", url: "#", icon: Github },
-        { label: "Live Site", url: "#", icon: ExternalLink },
-      ],
-      description: `Created a comprehensive web application with user authentication, real-time features, 
-        and responsive design. Implemented modern development practices including TypeScript, 
-        automated testing, and CI/CD pipelines for seamless deployment and maintenance.
-        The application features a clean, intuitive interface and handles thousands of 
-        concurrent users with excellent performance metrics.`,
-      photo: "/images/webapp-dashboard.jpg",
-    },
-    {
-      id: "project-4",
-      title: "Full-Stack Web App",
-      company: "Modern Web Development",
-      time: null,
-      skillColor: "bg-purple-500/20",
-      skills: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
-      links: [
-        { label: "Code", url: "#", icon: Github },
-        { label: "Live Site", url: "#", icon: ExternalLink },
-      ],
-      description: `Created a comprehensive web application with user authentication, real-time features, 
-        and responsive design. Implemented modern development practices including TypeScript, 
-        automated testing, and CI/CD pipelines for seamless deployment and maintenance.
-        The application features a clean, intuitive interface and handles thousands of 
-        concurrent users with excellent performance metrics.`,
-      photo: "/images/webapp-dashboard.jpg",
-    },
-    {
-      id: "project-5",
       title: "Full-Stack Web App",
       company: "Modern Web Development",
       time: null,
@@ -233,7 +197,14 @@ export default function Portfolio() {
           return
         }
 
-        handleCloseDetails()
+        const menuComponent = menuRef.current.querySelector(".staggered-menu-wrapper")
+        if (menuComponent) {
+          // Trigger the close animation by calling the component's close method
+          const closeButton = menuPanel?.querySelector("button")
+          if (closeButton) {
+            closeButton.click()
+          }
+        }
       }
     }
 
@@ -263,16 +234,8 @@ export default function Portfolio() {
 
   return (
     <div className="min-h-screen relative">
-      <div className="fixed inset-0 z-0">
-        <DarkVeil
-          hueShift={50}
-          noiseIntensity={0.03}
-          scanlineIntensity={0.15}
-          speed={0.5}
-          scanlineFrequency={0.8}
-          warpAmount={0.1}
-        />
-      </div>
+      
+      <div className="fixed inset-0 z-0 bg-[#297373]"></div>
 
       <div className="relative z-10">
         <Navigation />

@@ -96,6 +96,7 @@ export const PortfolioStaggeredMenu: React.FC<PortfolioStaggeredMenuProps> = ({
     const socialLinks = Array.from(panel.querySelectorAll(".sm-socials-link")) as HTMLElement[]
     const descriptionEl = panel.querySelector(".portfolio-description") as HTMLElement | null
     const photoEl = panel.querySelector(".portfolio-photo") as HTMLElement | null
+    const skillsEls = Array.from(panel.querySelectorAll(".skill-bubble")) as HTMLElement[]
 
     const layerStates = layers.map((el) => ({ el, start: Number(gsap.getProperty(el, "xPercent")) }))
     const panelStart = Number(gsap.getProperty(panel, "xPercent"))
@@ -105,6 +106,7 @@ export const PortfolioStaggeredMenu: React.FC<PortfolioStaggeredMenuProps> = ({
     if (socialLinks.length) gsap.set(socialLinks, { y: 25, opacity: 0 })
     if (descriptionEl) gsap.set(descriptionEl, { x: 30, opacity: 0 })
     if (photoEl) gsap.set(photoEl, { x: 30, opacity: 0 })
+    if (skillsEls.length) gsap.set(skillsEls, { y: 25, opacity: 0 })
 
     const tl = gsap.timeline({ paused: true })
 
@@ -149,6 +151,22 @@ export const PortfolioStaggeredMenu: React.FC<PortfolioStaggeredMenuProps> = ({
           stagger: { each: 0.08, from: "start" },
         },
         socialsStart + 0.04,
+      )
+    }
+
+    if (skillsEls.length) {
+      const skillsStart = panelInsertTime + panelDuration * 0.5
+
+      tl.to(
+        skillsEls,
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.55,
+          ease: "power3.out",
+          stagger: { each: 0.08, from: "start" },
+        },
+        skillsStart + 0.04,
       )
     }
 
@@ -284,25 +302,8 @@ export const PortfolioStaggeredMenu: React.FC<PortfolioStaggeredMenuProps> = ({
               </li>
             </ul>
 
-            {/* Description - simple slide in */}
-            <div className="portfolio-description mt-8">
-              <h3 className="text-base font-medium text-[var(--sm-accent)] mb-4">About</h3>
-              <p className="text-black text-base leading-relaxed">{itemData.description}</p>
-            </div>
-
-            {/* Photo - simple slide in */}
-            {itemData.photo && (
-              <div className="portfolio-photo mt-6">
-                <img
-                  src={itemData.photo || "/placeholder.svg"}
-                  alt={`${itemData.title} preview`}
-                  className="w-full h-48 object-cover rounded-lg"
-                />
-              </div>
-            )}
-
             {/* Links with original social styling and animations */}
-            <div className="sm-socials mt-auto pt-8 flex flex-col gap-3" aria-label="Project links">
+            <div className="sm-socials mt-6 pt-4 flex flex-col gap-3" aria-label="Project links">
               <h3 className="sm-socials-title m-0 text-base font-medium text-[var(--sm-accent)]">Links</h3>
               <ul className="sm-socials-list list-none m-0 p-0 flex flex-row items-center gap-4 flex-wrap" role="list">
                 {itemData.links.map((link, i) => (
@@ -319,6 +320,39 @@ export const PortfolioStaggeredMenu: React.FC<PortfolioStaggeredMenuProps> = ({
                 ))}
               </ul>
             </div>
+
+            {/* Skills as small subtle bubbles */}
+            {itemData.skills && itemData.skills.length > 0 && (
+              <div className="mt-4">
+                <div className="flex flex-wrap gap-2">
+                  {itemData.skills.map((skill, i) => (
+                    <span
+                      key={skill + i}
+                      className="skill-bubble px-2 py-1 text-xs font-medium text-gray-600 bg-gray-100 rounded-full border border-gray-200"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Description - simple slide in */}
+            <div className="portfolio-description mt-6">
+              <h3 className="text-base font-medium text-[var(--sm-accent)] mb-4">About</h3>
+              <p className="text-black text-base leading-relaxed">{itemData.description}</p>
+            </div>
+
+            {/* Photo - simple slide in */}
+            {itemData.photo && (
+              <div className="portfolio-photo mt-6">
+                <img
+                  src={itemData.photo || "/placeholder.svg"}
+                  alt={`${itemData.title} preview`}
+                  className="w-full h-48 object-cover rounded-lg"
+                />
+              </div>
+            )}
           </div>
         </aside>
       </div>
@@ -341,6 +375,7 @@ export const PortfolioStaggeredMenu: React.FC<PortfolioStaggeredMenuProps> = ({
 .sm-scope .sm-panel-item { position: relative; color: #000; font-weight: 600; cursor: default; line-height: 1; letter-spacing: -2px; text-transform: uppercase; display: inline-block; text-decoration: none; padding-right: 1.4em; }
 .sm-scope .sm-panel-itemLabel { display: inline-block; will-change: transform; transform-origin: 50% 100%; }
 .sm-scope .sm-panel-itemWrap { position: relative; overflow: hidden; line-height: 1; }
+.skill-bubble { display: inline-block; margin-right: 4px; }
 @media (max-width: 1024px) { .sm-scope .staggered-menu-panel { width: 100%; left: 0; right: 0; } }
 @media (max-width: 640px) { .sm-scope .staggered-menu-panel { width: 100%; left: 0; right: 0; } }
       `}</style>

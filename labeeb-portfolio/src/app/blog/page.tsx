@@ -5,17 +5,8 @@ import Navigation from '../components/Navigation';
 export default function Blog() {
   return (
     <div className="min-h-screen relative">
-      {/* Same background */}
-      <div className="fixed inset-0 z-0">
-        <DarkVeil 
-          hueShift={50}
-          noiseIntensity={0.03}
-          scanlineIntensity={0.15}
-          speed={0.5}
-          scanlineFrequency={0.8}
-          warpAmount={0.1}
-        />
-      </div>
+      
+      <div className="fixed inset-0 z-0 bg-[#297373]"></div>
       
       {/* Content overlay */}
       <div className="relative z-10">
