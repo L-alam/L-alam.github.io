@@ -3,9 +3,9 @@
 
 import DarkVeil from '../components/DarkVeil';
 import Navigation from '../components/Navigation';
-import Folder from '../components/Folder';
 import { ExternalLink, Github, ChevronDown } from 'lucide-react';
 import { useState } from 'react';
+import Image from 'next/image';
 
 // Portfolio data structure
 const portfolioData = {
@@ -26,8 +26,7 @@ const portfolioData = {
         with cross-functional teams to implement scalable solutions for vehicle telemetry 
         and diagnostics. This role gave me extensive experience with enterprise-level Java applications 
         and real-time data processing at scale.`,
-      photo: '/images/hyundai-office.png',
-      folderColor: '#3B82F6' // Blue
+      photo: '/images/hyundai-office.png'
     },
     {
       id: 'experience-2',
@@ -44,8 +43,7 @@ const portfolioData = {
         decision-making and policy development initiatives affecting Massachusetts constituents.
         Worked directly with legislative staff to translate complex data into actionable insights 
         for policy makers.`,
-      photo: null,
-      folderColor: '#10B981' // Green
+      photo: null
     }
   ],
   projects: [
@@ -65,8 +63,7 @@ const portfolioData = {
         and low-latency gameplay experiences with support for 10,000+ concurrent players.
         Implemented sophisticated matchmaking algorithms and real-time synchronization 
         to ensure smooth gameplay across different devices and network conditions.`,
-      photo: '/images/game-architecture.png',
-      folderColor: '#8B5CF6' // Purple
+      photo: '/images/game-architecture.png'
     },
     {
       id: 'project-2',
@@ -83,8 +80,7 @@ const portfolioData = {
         to handle varying computational workloads efficiently across cloud infrastructure.
         The system can dynamically allocate resources based on workload demands and 
         automatically recover from node failures without data loss.`,
-      photo: null,
-      folderColor: '#F59E0B' // Orange
+      photo: null
     },
     {
       id: 'project-3',
@@ -102,13 +98,12 @@ const portfolioData = {
         automated testing, and CI/CD pipelines for seamless deployment and maintenance.
         The application features a clean, intuitive interface and handles thousands of 
         concurrent users with excellent performance metrics.`,
-      photo: '/images/webapp-dashboard.jpg',
-      folderColor: '#EF4444' // Red
+      photo: '/images/webapp-dashboard.jpg'
     }
   ]
 };
 
-// Folder Grid Component that handles responsive rows
+// iOS-style Folder Grid Component
 const FolderGrid = ({ items, onFolderClick, expandedItem }) => {
   const itemsPerRow = 5;
   const rows = [];
@@ -118,26 +113,30 @@ const FolderGrid = ({ items, onFolderClick, expandedItem }) => {
   }
 
   return (
-    <div className="space-y-16">
+    <div className="space-y-12">
       {rows.map((row, rowIndex) => (
-        <div key={rowIndex} className="flex justify-center space-x-8">
+        <div key={rowIndex} className="grid grid-cols-5 gap-8 mx-8">
           {row.map((item) => (
-            <div key={item.id} className="flex flex-col items-center space-y-4">
+            <div key={item.id} className="flex flex-col items-center space-y-3">
               <div 
-                className="cursor-pointer transform transition-transform hover:scale-105"
+                className={`cursor-pointer transform transition-all duration-300 hover:scale-110`}
                 onClick={() => onFolderClick(item.id)}
               >
-                <Folder 
-                  size={1.5} 
-                  color={item.folderColor}
-                  className="drop-shadow-lg"
-                />
+                <div className="w-16 h-16 relative">
+                  <Image
+                    src="/images/folder_icon.png"
+                    alt="Folder"
+                    width={64}
+                    height={64}
+                    className="drop-shadow-lg"
+                  />
+                </div>
               </div>
-              <div className="text-center max-w-[140px]">
-                <h3 className="text-white font-semibold text-sm leading-tight mb-1">
+              <div className="text-center max-w-[120px]">
+                <h3 className="text-white font-semibold text-sm leading-tight mb-1 truncate">
                   {item.company}
                 </h3>
-                <p className="text-gray-300 text-xs leading-tight">
+                <p className="text-gray-300 text-xs leading-tight line-clamp-2">
                   {item.title}
                 </p>
                 {item.time && (
@@ -148,14 +147,18 @@ const FolderGrid = ({ items, onFolderClick, expandedItem }) => {
               </div>
             </div>
           ))}
+          {/* Fill empty spots to maintain grid alignment */}
+          {Array.from({ length: itemsPerRow - row.length }).map((_, index) => (
+            <div key={`empty-${index}`} />
+          ))}
         </div>
       ))}
     </div>
   );
 };
 
-// Expanded Item Details Component
-const ItemDetails = ({ item, onClose }) => {
+// Expanded Item Details Component with slide animation
+const ItemDetails = ({ item, onClose, isVisible }) => {
   const skillColors = {
     'Django': 'bg-green-500/20 text-green-300',
     'Python': 'bg-green-500/20 text-green-300',
@@ -169,6 +172,18 @@ const ItemDetails = ({ item, onClose }) => {
     'SQL': 'bg-blue-500/20 text-blue-300',
     'Docker': 'bg-blue-500/20 text-blue-300',
     'Kubernetes': 'bg-blue-500/20 text-blue-300',
+    'Dynatrace': 'bg-blue-500/20 text-blue-300',
+    'Jira': 'bg-blue-500/20 text-blue-300',
+    'Elastic': 'bg-blue-500/20 text-blue-300',
+    'Siebel': 'bg-blue-500/20 text-blue-300',
+    'Monitoring': 'bg-blue-500/20 text-blue-300',
+    'Data Analytics': 'bg-green-500/20 text-green-300',
+    'Policy Analysis': 'bg-green-500/20 text-green-300',
+    'Pandas': 'bg-green-500/20 text-green-300',
+    'WebSocket': 'bg-purple-500/20 text-purple-300',
+    'Redis': 'bg-red-500/20 text-red-300',
+    'PostgreSQL': 'bg-blue-500/20 text-blue-300',
+    'Apache Kafka': 'bg-orange-500/20 text-orange-300',
     'default': 'bg-gray-500/20 text-gray-300'
   };
 
@@ -177,8 +192,10 @@ const ItemDetails = ({ item, onClose }) => {
   };
 
   return (
-    <div className="mt-8 mb-12">
-      <div className="max-w-4xl mx-auto">
+    <div className={`overflow-hidden transition-all duration-500 ease-in-out ${
+      isVisible ? 'max-h-[1000px] opacity-100 transform translate-y-0' : 'max-h-0 opacity-0 transform -translate-y-4'
+    }`}>
+      <div className="mt-8 mb-12 mx-8">
         <div className="rounded-xl overflow-hidden bg-gray-700/70 backdrop-blur-md border border-white/10">
           {/* Header */}
           <div className="bg-gray-900/70 backdrop-blur-md p-6 flex justify-between items-start">
@@ -189,7 +206,7 @@ const ItemDetails = ({ item, onClose }) => {
             </div>
             <button 
               onClick={onClose}
-              className="text-gray-400 hover:text-white transition-colors p-2"
+              className="text-gray-400 hover:text-white transition-colors p-2 hover:bg-white/10 rounded-lg"
             >
               <ChevronDown className="rotate-180" size={24} />
             </button>
@@ -289,15 +306,12 @@ export default function Portfolio() {
       <div className="relative z-10">
         <Navigation />
         
-        <main className="container mx-auto px-8 py-12">
+        <main className="max-w-6xl mx-auto px-4 py-12">
 
           {/* Experience Section */}
           <section className="mb-20">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-white mb-4">Experience</h2>
-              <p className="text-gray-300">
-                Professional roles and internships that shaped my career
-              </p>
+            <div className="mb-12 mx-8">
+              <h2 className="text-3xl font-bold text-white mb-4">Experience:</h2>
             </div>
             
             <FolderGrid 
@@ -305,15 +319,21 @@ export default function Portfolio() {
               onFolderClick={handleFolderClick}
               expandedItem={expandedItem}
             />
+
+            {/* Expanded Experience Details */}
+            {expandedItem && portfolioData.experiences.find(item => item.id === expandedItem) && (
+              <ItemDetails 
+                item={expandedItemData}
+                onClose={handleCloseDetails}
+                isVisible={true}
+              />
+            )}
           </section>
 
           {/* Projects Section */}
           <section className="mb-20">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-white mb-4">Projects</h2>
-              <p className="text-gray-300">
-                Personal and collaborative projects demonstrating technical skills
-              </p>
+            <div className="mb-12 mx-8">
+              <h2 className="text-3xl font-bold text-white mb-4">Projects:</h2>
             </div>
             
             <FolderGrid 
@@ -321,15 +341,16 @@ export default function Portfolio() {
               onFolderClick={handleFolderClick}
               expandedItem={expandedItem}
             />
-          </section>
 
-          {/* Expanded Item Details */}
-          {expandedItemData && (
-            <ItemDetails 
-              item={expandedItemData}
-              onClose={handleCloseDetails}
-            />
-          )}
+            {/* Expanded Project Details */}
+            {expandedItem && portfolioData.projects.find(item => item.id === expandedItem) && (
+              <ItemDetails 
+                item={expandedItemData}
+                onClose={handleCloseDetails}
+                isVisible={true}
+              />
+            )}
+          </section>
         </main>
       </div>
     </div>
