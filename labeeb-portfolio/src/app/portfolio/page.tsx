@@ -61,11 +61,11 @@ const portfolioData = {
       id: "project-1",
       title: "Mobile Board Game App",
       company: "Amongyall",
-      time: null,
+      time: "July - September 2025",
       skillColor: "bg-purple-500/20",
       skills: ["React Native", "Typescript", "Supabase", "OpenAI API", "Stripe API"],
       links: [
-        { label: "Github", url: "#", icon: Github },
+        { label: "Github", url: "https://github.com/L-alam/amongyall", icon: Github },
         { label: "Demo", url: "#", icon: ExternalLink },
       ],
       description: `Created a mobile board game app to play with friends. Developed with React Native and Expo, 
@@ -75,40 +75,42 @@ const portfolioData = {
       Google AdMob for optimized ad placement and monetization. Led extensive beta testing with 20+ users to 
       refine gameplay and user experience, and successfully deployed the application to the iOS App Store with 
       a production-ready CI/CD pipeline, ensuring robust performance and maintainability.`,
-      photo: "/images/hyundai-office.png",
+      photo: "/images/amongyall.png",
     },
     {
       id: "project-2",
-      title: "CS 505",
-      company: "AI Pokemon Bot",
-      time: null,
-      skillColor: "bg-purple-500/20",
-      skills: ["Go", "Docker", "Kubernetes", "Apache Kafka"],
-      links: [{ label: "Code", url: "#", icon: Github }],
-      description: `Developed a distributed computing framework for processing large datasets across 
-        multiple nodes. Implemented fault tolerance, load balancing, and automatic scaling 
-        to handle varying computational workloads efficiently across cloud infrastructure.
-        The system can dynamically allocate resources based on workload demands and 
-        automatically recover from node failures without data loss.`,
-      photo: null,
-    },
-    {
-      id: "project-3",
       title: "Productivity Mobile App",
       company: "Momentum",
-      time: null,
+      time: "April - May 2025",
       skillColor: "bg-purple-500/20",
       skills: ["Kotlin", "SQL", "Google Maps/Calendar API", "Exercise DB"],
       links: [
-        { label: "Code", url: "#", icon: Github },
-        { label: "Live Site", url: "#", icon: ExternalLink },
+        { label: "Code", url: "https://github.com/Mussie0001/CS501-Final-Project-Momentum", icon: Github },
       ],
-      description: `Created a comprehensive web application with user authentication, real-time features, 
-        and responsive design. Implemented modern development practices including TypeScript, 
-        automated testing, and CI/CD pipelines for seamless deployment and maintenance.
-        The application features a clean, intuitive interface and handles thousands of 
-        concurrent users with excellent performance metrics.`,
-      photo: "/images/webapp-dashboard.jpg",
+      description: `Momentum is a productivity-focused Android application built with Kotlin and Room DB that 
+      enables users to create, track, and visualize daily habits. The app automates physical activity tracking 
+      using Android’s Step Counter Sensor, displays motivational quotes via the ZenQuotes API, and provides 
+      calendar-based progress visualization with daily, weekly, and monthly views. Momentum supports cross-device 
+      synchronization between smartphones and Wear OS smartwatches, offering adaptive layouts for different 
+      screen orientations and a seamless user experience across devices..`,
+      photo: "/images/momentum.png",
+    },
+    {
+      id: "project-4",
+      title: "CS 440",
+      company: "AI Pokemon Bot",
+      time: null,
+      skillColor: "bg-purple-500/20",
+      skills: ["Java"],
+      links: [],
+      description: `Created a mobile board game app to play with friends. Developed with React Native and Expo, 
+      featuring three distinct game modes, dynamic player management, and customizable user elements. Engineered 
+      a comprehensive backend with Supabase for real-time database management and user authentication, integrated 
+      Stripe for secure payments, Google Auth for smooth onboarding, OpenAI for AI-driven game features, and 
+      Google AdMob for optimized ad placement and monetization. Led extensive beta testing with 20+ users to 
+      refine gameplay and user experience, and successfully deployed the application to the iOS App Store with 
+      a production-ready CI/CD pipeline, ensuring robust performance and maintainability.`,
+      photo: "/images/amongyall.png",
     },
   ],
 }
