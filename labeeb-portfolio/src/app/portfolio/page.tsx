@@ -41,7 +41,7 @@ const portfolioData = {
       process census data, surveys, and 300+ project locations, enabling real-time monitoring and equity 
       impact assessments. I was the primary point of contact and delivered data-driven policy recommendations with 
       an interactive Tableau dashboard for stakeholders.`,
-      photo: "/images/cs506-presentation.png",
+      photo: "/images/spark-expo.png",
     },
     {
       id: "experience-3",
@@ -96,21 +96,52 @@ const portfolioData = {
       photo: "/images/momentum.png",
     },
     {
-      id: "project-4",
-      title: "CS 440",
+      id: "project-3",
+      title: "",
       company: "AI Pokemon Bot",
-      time: null,
+      time: "March 2025",
       skillColor: "bg-purple-500/20",
       skills: ["Java"],
-      links: [],
-      description: `Created a mobile board game app to play with friends. Developed with React Native and Expo, 
-      featuring three distinct game modes, dynamic player management, and customizable user elements. Engineered 
-      a comprehensive backend with Supabase for real-time database management and user authentication, integrated 
-      Stripe for secure payments, Google Auth for smooth onboarding, OpenAI for AI-driven game features, and 
-      Google AdMob for optimized ad placement and monetization. Led extensive beta testing with 20+ users to 
-      refine gameplay and user experience, and successfully deployed the application to the iOS App Store with 
-      a production-ready CI/CD pipeline, ensuring robust performance and maintainability.`,
-      photo: "/images/amongyall.png",
+      links: [
+        { label: "Code", url: "https://github.com/L-alam/Pokemon-bot", icon: Github },
+      ],
+      description: `Developed a Pokémon Battle AI Agent in Java that uses a stochastic minimax algorithm with 
+      aggressive alpha-beta pruning to efficiently evaluate potential moves and outcomes. Implemented tree traversal 
+      infrastructure with MAX, MIN, and CHANCE nodes to model game randomness, including move order, status effects, 
+      confusion, Pokemon types, and post-turn conditions. Designed utility heuristics and subtree pruning to handle the large, 
+      stochastic game tree, enabling the agent to make optimal decisions under uncertainty. Achieved 90%+ win rates 
+      against advanced opponents and was a semi-finalist in the BU AI Pokémon Battle competition.`,
+      photo: "/images/pokemonbot.png",
+    },
+    {
+      id: "project-4",
+      title: "",
+      company: "MapReduce & Raft",
+      time: "April 2025",
+      skillColor: "bg-purple-500/20",
+      skills: ["GoLang"],
+      links: [
+        { label: "Code", url: "https://github.com/L-alam/3PC-golang", icon: Github },
+      ],
+      description: `Implemented distributed systems concepts in Go by recreating the MapReduce programming model for 
+      large-scale data processing. Then reverse-engineering the RAFT consensus algorithm to simulate fault-tolerant 
+      replication in real-world scenarios. Designed the system to handle node failures gracefully, ensuring consistency and reliability across distributed nodes`,
+      photo: "/images/raft.png",
+    },
+    {
+      id: "project-5",
+      title: "",
+      company: "Group Trip Planner",
+      time: "June 2025",
+      skillColor: "bg-purple-500/20",
+      skills: ["Django, Javascript, "],
+      links: [
+        { label: "Code", url: "https://github.com/L-alam/CS-412", icon: Github },
+      ],
+      description: `Built a grouptrip planning page using Django. Implemented proper Django authentication forms to create users
+      to build travel portfolios and create trip planning dashboards. Allowed users to interact with each others real time changes
+      and view flight data from Google flights and hotel data from Google Hotels. `,
+      photo: "/images/trip-planner.png",
     },
   ],
 }

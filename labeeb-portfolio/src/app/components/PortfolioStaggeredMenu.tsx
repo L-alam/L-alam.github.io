@@ -293,13 +293,15 @@ export const PortfolioStaggeredMenu: React.FC<PortfolioStaggeredMenuProps> = ({
                   </span>
                 </div>
               </li>
-              <li className="sm-panel-itemWrap relative overflow-hidden leading-none mt-4">
-                <div className="sm-panel-item relative text-black font-semibold text-[2rem] leading-none tracking-[-1px] uppercase inline-block pr-[1.4em]">
-                  <span className="sm-panel-itemLabel inline-block [transform-origin:50%_100%] will-change-transform">
-                    {itemData.title}
-                  </span>
-                </div>
-              </li>
+              {itemData.title && itemData.title.length > 0 && (
+                <li className="sm-panel-itemWrap relative overflow-hidden leading-none mt-4">
+                  <div className="sm-panel-item relative text-black font-semibold text-[2rem] leading-none tracking-[-1px] uppercase inline-block pr-[1.4em]">
+                    <span className="sm-panel-itemLabel inline-block [transform-origin:50%_100%] will-change-transform">
+                      {itemData.title}
+                    </span>
+                  </div>
+                </li>
+              )}
             </ul>
 
             {/* Links with original social styling and animations */}
