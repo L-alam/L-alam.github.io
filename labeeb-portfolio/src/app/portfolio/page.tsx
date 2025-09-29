@@ -14,57 +14,73 @@ const portfolioData = {
       id: "experience-1",
       title: "SWE Intern",
       company: "Hyundai AutoEver America",
-      time: "June 2024 - September 2024",
+      time: "June - September 2024",
       skillColor: "bg-blue-500/20",
       skills: ["Django", "Dynatrace", "SQL", "Jira", "Elastic", "Siebel", "Monitoring"],
-      links: [{ label: "Company Site", url: "#", icon: ExternalLink }],
-      description: `Optimized support systems for connected vehicles, improving system performance 
-        and reliability by 30%. Worked with distributed systems and real-time data processing 
-        to enhance the user experience for Hyundai's connected car platform. Collaborated 
-        with cross-functional teams to implement scalable solutions for vehicle telemetry 
-        and diagnostics. This role gave me extensive experience with enterprise-level Java applications 
-        and real-time data processing at scale.`,
+      links: [],
+      description: `I managed and resolved 100+ support tickets for Hyundai BlueLink, Kia Connect,
+       and Genesis Intelligent Assistant, leveraging Jira, SQL, Elastic, and Siebel to achieve a 90% resolution 
+       rate within 24 hours. To improve visibility into operations, I designed and implemented a dynamic 
+       Django-based dashboard using the Jira API, enabling administrators to easily track and address weekly 
+       issue resolution rates. Additionally, I reduced manual processing time by 50% by automating a VIN 
+       validation system for more than 5,000 vehicles across Canadian markets, while ensuring full compliance 
+       with industry standards. I also collaborated with the monitoring team, gaining hands-on experience with 
+       Dynatrace and Elastic to assess system health and support proactive issue resolution.`,
       photo: "/images/hyundai-office.png",
     },
     {
       id: "experience-2",
       title: "Team Lead",
       company: "Senator Ed Markey's Office",
-      time: "2023",
+      time: "February - June 2024",
       skillColor: "bg-blue-500/20",
-      skills: ["Python", "Data Analytics", "Policy Analysis", "Pandas"],
-      links: [{ label: "Senator's Office", url: "#", icon: ExternalLink }],
-      description: `Analyzed federal budget allocations and policy impacts using advanced data analytics. 
-        Created comprehensive reports and interactive visualizations to support legislative 
-        decision-making and policy development initiatives affecting Massachusetts constituents.
-        Worked directly with legislative staff to translate complex data into actionable insights 
-        for policy makers.`,
-      photo: "/images/hyundai-office.png",
+      skills: ["Python", "Pandas", "Pygeo", "SQL", "Tableau", "Google Earth API"],
+      description: `Led a team of six analyzing $2.5M in federal earmark allocations using Python, 
+      SQL, and geospatial analysis to make a plan for equitable distribution of resources for the state of Massachusetts. 
+      We developed an automated tracking systems with Pandas, PyGeo, and Google Earth API to 
+      process census data, surveys, and 300+ project locations, enabling real-time monitoring and equity 
+      impact assessments. I was the primary point of contact and delivered data-driven policy recommendations with 
+      an interactive Tableau dashboard for stakeholders.`,
+      photo: "/images/cs506-presentation.png",
+    },
+    {
+      id: "experience-3",
+      title: "Student Intern",
+      company: "Titan Tech ltd.",
+      time: "September - November 2023",
+      skillColor: "bg-blue-500/20",
+      skills: ["Django, Node.js"],
+      description: `Developed a full-stack prototype using Django and Node.js to connect laid-off workers 
+      with potential employers. Implemented user authentication workflows and a clean, intuitive UI/UX, 
+      establishing a strong technical foundation for future development.`,
+      photo: "",
     },
   ],
   projects: [
     {
       id: "project-1",
-      title: "Mobile Game Backend",
-      company: "Scalable Gaming Infrastructure",
+      title: "Mobile Board Game App",
+      company: "Amongyall",
       time: null,
       skillColor: "bg-purple-500/20",
-      skills: ["Node.js", "WebSocket", "Redis", "PostgreSQL"],
+      skills: ["React Native", "Typescript", "Supabase", "OpenAI API", "Stripe API"],
       links: [
-        { label: "Code", url: "#", icon: Github },
+        { label: "Github", url: "#", icon: Github },
         { label: "Demo", url: "#", icon: ExternalLink },
       ],
-      description: `Built a scalable backend system for mobile games supporting real-time multiplayer 
-        functionality, leaderboards, and user management. Designed for high concurrency 
-        and low-latency gameplay experiences with support for 10,000+ concurrent players.
-        Implemented sophisticated matchmaking algorithms and real-time synchronization 
-        to ensure smooth gameplay across different devices and network conditions.`,
+      description: `Created a mobile board game app to play with friends. Developed with React Native and Expo, 
+      featuring three distinct game modes, dynamic player management, and customizable user elements. Engineered 
+      a comprehensive backend with Supabase for real-time database management and user authentication, integrated 
+      Stripe for secure payments, Google Auth for smooth onboarding, OpenAI for AI-driven game features, and 
+      Google AdMob for optimized ad placement and monetization. Led extensive beta testing with 20+ users to 
+      refine gameplay and user experience, and successfully deployed the application to the iOS App Store with 
+      a production-ready CI/CD pipeline, ensuring robust performance and maintainability.`,
       photo: "/images/hyundai-office.png",
     },
     {
       id: "project-2",
-      title: "Distributed Computing System",
-      company: "High-Performance Computing",
+      title: "CS 505",
+      company: "AI Pokemon Bot",
       time: null,
       skillColor: "bg-purple-500/20",
       skills: ["Go", "Docker", "Kubernetes", "Apache Kafka"],
@@ -78,11 +94,11 @@ const portfolioData = {
     },
     {
       id: "project-3",
-      title: "Full-Stack Web App",
-      company: "Modern Web Development",
+      title: "Productivity Mobile App",
+      company: "Momentum",
       time: null,
       skillColor: "bg-purple-500/20",
-      skills: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
+      skills: ["Kotlin", "SQL", "Google Maps/Calendar API", "Exercise DB"],
       links: [
         { label: "Code", url: "#", icon: Github },
         { label: "Live Site", url: "#", icon: ExternalLink },

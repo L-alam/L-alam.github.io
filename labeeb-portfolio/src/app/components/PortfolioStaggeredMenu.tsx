@@ -293,7 +293,7 @@ export const PortfolioStaggeredMenu: React.FC<PortfolioStaggeredMenuProps> = ({
                   </span>
                 </div>
               </li>
-              <li className="sm-panel-itemWrap relative overflow-hidden leading-none">
+              <li className="sm-panel-itemWrap relative overflow-hidden leading-none mt-4">
                 <div className="sm-panel-item relative text-black font-semibold text-[2rem] leading-none tracking-[-1px] uppercase inline-block pr-[1.4em]">
                   <span className="sm-panel-itemLabel inline-block [transform-origin:50%_100%] will-change-transform">
                     {itemData.title}
@@ -303,23 +303,25 @@ export const PortfolioStaggeredMenu: React.FC<PortfolioStaggeredMenuProps> = ({
             </ul>
 
             {/* Links with original social styling and animations */}
-            <div className="sm-socials mt-6 pt-4 flex flex-col gap-3" aria-label="Project links">
-              <h3 className="sm-socials-title m-0 text-base font-medium text-[var(--sm-accent)]">Links</h3>
-              <ul className="sm-socials-list list-none m-0 p-0 flex flex-row items-center gap-4 flex-wrap" role="list">
-                {itemData.links.map((link, i) => (
-                  <li key={link.label + i} className="sm-socials-item">
-                    <a
-                      href={link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="sm-socials-link text-[1.2rem] font-medium text-[#111] no-underline relative inline-block py-[2px] transition-[color,opacity] duration-300 ease-linear"
-                    >
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            {itemData.links && itemData.links.length > 0 && (
+              <div className="sm-socials mt-6 pt-4 flex flex-col gap-3" aria-label="Project links">
+                <h3 className="sm-socials-title m-0 text-base font-medium text-[var(--sm-accent)]">Links</h3>
+                <ul className="sm-socials-list list-none m-0 p-0 flex flex-row items-center gap-4 flex-wrap" role="list">
+                  {itemData.links.map((link, i) => (
+                    <li key={link.label + i} className="sm-socials-item">
+                      <a
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="sm-socials-link text-[0.8rem] font-sm text-[#111] no-underline relative inline-block py-[2px] transition-[color,opacity] duration-300 ease-linear"
+                      >
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
             {/* Skills as small subtle bubbles */}
             {itemData.skills && itemData.skills.length > 0 && (
@@ -349,7 +351,7 @@ export const PortfolioStaggeredMenu: React.FC<PortfolioStaggeredMenuProps> = ({
                 <img
                   src={itemData.photo || "/placeholder.svg"}
                   alt={`${itemData.title} preview`}
-                  className="w-full h-48 object-cover rounded-lg"
+                  className="w-full h-full object-cover rounded-lg"
                 />
               </div>
             )}
