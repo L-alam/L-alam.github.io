@@ -1,6 +1,5 @@
 "use client"
 
-import DarkVeil from "../components/DarkVeil"
 import Navigation from "../components/Navigation"
 import { ExternalLink, Github } from "lucide-react"
 import { useState, useRef, useEffect } from "react"
@@ -46,10 +45,10 @@ const portfolioData = {
     {
       id: "experience-3",
       title: "Student Intern",
-      company: "Titan Tech ltd.",
+      company: "Titan Technologies ltd.",
       time: "September - November 2023",
       skillColor: "bg-blue-500/20",
-      skills: ["Django, Node.js"],
+      skills: ["Django", "Node.js"],
       description: `Developed a full-stack prototype using Django and Node.js to connect laid-off workers 
       with potential employers. Implemented user authentication workflows and a clean, intuitive UI/UX, 
       establishing a strong technical foundation for future development.`,
@@ -110,7 +109,7 @@ const portfolioData = {
       infrastructure with MAX, MIN, and CHANCE nodes to model game randomness, including move order, status effects, 
       confusion, Pokemon types, and post-turn conditions. Designed utility heuristics and subtree pruning to handle the large, 
       stochastic game tree, enabling the agent to make optimal decisions under uncertainty. Achieved 90%+ win rates 
-      against advanced opponents and was a semi-finalist in the BU AI Pokémon Battle competition.`,
+      against advanced opponents and was a semi-finalist at BU AI Pokémon Battle competition.`,
       photo: "/images/pokemonbot.png",
     },
     {
@@ -138,9 +137,9 @@ const portfolioData = {
       links: [
         { label: "Code", url: "https://github.com/L-alam/CS-412", icon: Github },
       ],
-      description: `Built a grouptrip planning page using Django. Implemented proper Django authentication forms to create users
-      to build travel portfolios and create trip planning dashboards. Allowed users to interact with each others real time changes
-      and view flight data from Google flights and hotel data from Google Hotels. `,
+      description: `Built a group trip planning page using Django. Implemented proper Django authentication forms to create users.
+      Allowing them to build travel portfolios and trip planning dashboards while able interact with the real time changes of other users.
+      Uses and displays web scraped flight data from Google flights and hotel data from Google Hotels.`,
       photo: "/images/trip-planner.png",
     },
   ],
