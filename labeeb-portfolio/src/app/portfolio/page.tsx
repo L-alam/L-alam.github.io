@@ -1,12 +1,11 @@
 "use client"
 
 import Navigation from "../components/Navigation"
-import { ExternalLink, Github } from "lucide-react"
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef } from "react"
 import Image from "next/image"
 import PortfolioStaggeredMenu from "../components/PortfolioStaggeredMenu"
+import { ExternalLink, Github } from "lucide-react"
 
-// Portfolio data structure
 const portfolioData = {
   experiences: [
     {
@@ -144,7 +143,6 @@ const portfolioData = {
     },
   ],
 }
-
 const FolderGrid = ({ items, onFolderClick, expandedItem, folderRefs, isMenuOpen }) => {
   const itemsPerRow = 5
   const rows = []
@@ -160,7 +158,7 @@ const FolderGrid = ({ items, onFolderClick, expandedItem, folderRefs, isMenuOpen
           key={rowIndex}
           className={`grid grid-cols-5 mx-8 transition-all duration-500 ease-out ${isMenuOpen ? "gap-2" : "gap-8"}`}
         >
-          {row.map((item) => (
+          {row.map((item, itemIndex) => (
             <div key={item.id} className="flex flex-col items-center space-y-3">
               <div
                 ref={(el) => (folderRefs.current[item.id] = el)}
@@ -175,6 +173,10 @@ const FolderGrid = ({ items, onFolderClick, expandedItem, folderRefs, isMenuOpen
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.filter = ""
+                }}
+                style={{
+                  animation: "float 3s ease-in-out infinite",
+                  animationDelay: `${itemIndex * 0.2}s`,
                 }}
               >
                 <div className="w-20 h-20 relative">
@@ -228,46 +230,8 @@ export default function Portfolio() {
     }
   }
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (expandedItem && menuRef.current) {
-        const clickedFolder = Object.values(folderRefs.current).find(
-          (folder) => folder && folder.contains(event.target as Node),
-        )
-
-        if (clickedFolder) {
-          return
-        }
-
-        const menuPanel = menuRef.current.querySelector('[data-menu-panel="true"]')
-        if (menuPanel && menuPanel.contains(event.target as Node)) {
-          return
-        }
-
-        const menuComponent = menuRef.current.querySelector(".staggered-menu-wrapper")
-        if (menuComponent) {
-          // Trigger the close animation by calling the component's close method
-          const closeButton = menuPanel?.querySelector("button")
-          if (closeButton) {
-            closeButton.click()
-          }
-        }
-      }
-    }
-
-    if (expandedItem) {
-      document.addEventListener("mousedown", handleClickOutside)
-    }
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside)
-    }
-  }, [expandedItem])
-
   const handleCloseDetails = () => {
     setExpandedItem(null)
-    setIsTransitioning(false)
-    setNextItem(null)
   }
 
   const getExpandedItemData = () => {
@@ -281,7 +245,17 @@ export default function Portfolio() {
 
   return (
     <div className="min-h-screen relative">
-      
+      <style jsx global>{`
+        @keyframes float {
+          0%, 100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-10px);
+          }
+        }
+      `}</style>
+
       <div className="fixed inset-0 z-0 bg-[#297373]"></div>
 
       <div className="relative z-10">
