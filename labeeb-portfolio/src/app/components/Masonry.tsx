@@ -1,4 +1,3 @@
-// components/Masonry.tsx
 import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 
@@ -53,8 +52,13 @@ const preloadImages = async (urls: string[]): Promise<void> => {
 interface Item {
   id: string;
   img: string;
-  url: string;
+  caption: string;
   height: number;
+  position?: 'center' | 'top' | 'bottom';
+  // Fine-tuned positioning (percentage values)
+  positionX?: number; // -50 to 50 (negative = left, positive = right)
+  positionY?: number; // -50 to 50 (negative = up, positive = down)
+  zoom?: number; // 1 = normal, 1.2 = 120% zoom, 0.8 = 80% zoom
 }
 
 interface GridItem extends Item {
@@ -70,10 +74,7 @@ interface MasonryProps {
   duration?: number;
   stagger?: number;
   animateFrom?: 'bottom' | 'top' | 'left' | 'right' | 'center' | 'random';
-  scaleOnHover?: boolean;
-  hoverScale?: number;
   blurToFocus?: boolean;
-  colorShiftOnHover?: boolean;
 }
 
 const Masonry: React.FC<MasonryProps> = ({
@@ -82,10 +83,7 @@ const Masonry: React.FC<MasonryProps> = ({
   duration = 0.6,
   stagger = 0.05,
   animateFrom = 'bottom',
-  scaleOnHover = true,
-  hoverScale = 0.95,
-  blurToFocus = true,
-  colorShiftOnHover = false
+  blurToFocus = true
 }) => {
   const columns = useMedia(
     ['(min-width:1500px)', '(min-width:1000px)', '(min-width:600px)', '(min-width:400px)'],
@@ -192,32 +190,77 @@ const Masonry: React.FC<MasonryProps> = ({
     hasMounted.current = true;
   }, [grid, imagesReady, stagger, animateFrom, blurToFocus, duration, ease]);
 
-  const handleMouseEnter = (id: string, element: HTMLElement) => {
-    if (scaleOnHover) {
-      gsap.to(`[data-key="${id}"]`, {
-        scale: hoverScale,
+  const handleMouseEnter = (id: string) => {
+    const imageContainer = document.querySelector(`[data-key="${id}"] .image-bg`);
+    const captionOverlay = document.querySelector(`[data-key="${id}"] .caption-overlay`);
+    
+    if (imageContainer) {
+      gsap.to(imageContainer, {
+        filter: 'blur(4px) brightness(0.4)',
         duration: 0.3,
         ease: 'power2.out'
       });
     }
-    if (colorShiftOnHover) {
-      const overlay = element.querySelector('.color-overlay') as HTMLElement;
-      if (overlay) gsap.to(overlay, { opacity: 0.3, duration: 0.3 });
+    
+    if (captionOverlay) {
+      gsap.to(captionOverlay, {
+        opacity: 1,
+        duration: 0.3,
+        ease: 'power2.out'
+      });
     }
   };
 
-  const handleMouseLeave = (id: string, element: HTMLElement) => {
-    if (scaleOnHover) {
-      gsap.to(`[data-key="${id}"]`, {
-        scale: 1,
+  const handleMouseLeave = (id: string) => {
+    const imageContainer = document.querySelector(`[data-key="${id}"] .image-bg`);
+    const captionOverlay = document.querySelector(`[data-key="${id}"] .caption-overlay`);
+    
+    if (imageContainer) {
+      gsap.to(imageContainer, {
+        filter: 'blur(0px) brightness(1)',
         duration: 0.3,
         ease: 'power2.out'
       });
     }
-    if (colorShiftOnHover) {
-      const overlay = element.querySelector('.color-overlay') as HTMLElement;
-      if (overlay) gsap.to(overlay, { opacity: 0, duration: 0.3 });
+    
+    if (captionOverlay) {
+      gsap.to(captionOverlay, {
+        opacity: 0,
+        duration: 0.3,
+        ease: 'power2.out'
+      });
     }
+  };
+
+  const getBackgroundPosition = (item: Item) => {
+    // Start with preset position
+    let basePosition = 'center center';
+    switch (item.position) {
+      case 'top':
+        basePosition = 'center top';
+        break;
+      case 'bottom':
+        basePosition = 'center bottom';
+        break;
+      case 'center':
+      default:
+        basePosition = 'center center';
+    }
+
+    // Apply fine-tuned adjustments if provided
+    if (item.positionX !== undefined || item.positionY !== undefined) {
+      const x = 50 + (item.positionX || 0); // Convert -50 to 50 range to 0-100%
+      const y = 50 + (item.positionY || 0);
+      return `${x}% ${y}%`;
+    }
+
+    return basePosition;
+  };
+
+  const getBackgroundSize = (zoom?: number) => {
+    if (!zoom) return 'cover';
+    const percentage = zoom * 100;
+    return `${percentage}%`;
   };
 
   return (
@@ -226,19 +269,26 @@ const Masonry: React.FC<MasonryProps> = ({
         <div
           key={item.id}
           data-key={item.id}
-          className="absolute box-content cursor-pointer"
+          className="absolute box-content"
           style={{ willChange: 'transform, width, height, opacity' }}
-          onClick={() => window.open(item.url, '_blank', 'noopener')}
-          onMouseEnter={e => handleMouseEnter(item.id, e.currentTarget)}
-          onMouseLeave={e => handleMouseLeave(item.id, e.currentTarget)}
+          onMouseEnter={() => handleMouseEnter(item.id)}
+          onMouseLeave={() => handleMouseLeave(item.id)}
         >
-          <div
-            className="relative w-full h-full bg-cover bg-center rounded-[10px] shadow-[0px_10px_50px_-10px_rgba(0,0,0,0.2)] uppercase text-[10px] leading-[10px]"
-            style={{ backgroundImage: `url(${item.img})` }}
-          >
-            {colorShiftOnHover && (
-              <div className="color-overlay absolute inset-0 rounded-[10px] bg-gradient-to-tr from-pink-500/50 to-sky-500/50 opacity-0 pointer-events-none" />
-            )}
+          <div className="relative w-full h-full rounded-[10px] shadow-[0px_10px_50px_-10px_rgba(0,0,0,0.2)] overflow-hidden">
+            <div
+              className="image-bg absolute inset-0 bg-cover"
+              style={{ 
+                backgroundImage: `url(${item.img})`,
+                backgroundPosition: getBackgroundPosition(item),
+                backgroundSize: getBackgroundSize(item.zoom)
+              }}
+            />
+            
+            <div className="caption-overlay absolute inset-0 flex items-center justify-center opacity-0 pointer-events-none px-6 z-10">
+              <p className="text-white text-center text-base font-medium leading-relaxed drop-shadow-lg">
+                {item.caption}
+              </p>
+            </div>
           </div>
         </div>
       ))}
