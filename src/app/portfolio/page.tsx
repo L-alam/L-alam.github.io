@@ -4,7 +4,6 @@ import Navigation from "../components/Navigation"
 import { useState, useRef } from "react"
 import Image from "next/image"
 import PortfolioStaggeredMenu from "../components/PortfolioStaggeredMenu"
-import { ExternalLink, Github } from "lucide-react"
 
 const portfolioData = {
   experiences: [
@@ -29,7 +28,7 @@ const portfolioData = {
     {
       id: "experience-2",
       title: "Team Lead",
-      company: "Senator Ed Markey&apos;s Office",
+      company: "Senator Ed Markey's Office",
       time: "February - June 2024",
       skillColor: "bg-blue-500/20",
       skills: ["Python", "Pandas", "Pygeo", "SQL", "Tableau", "Google Earth API"],
@@ -210,7 +209,6 @@ const FolderGrid = ({ items, onFolderClick, expandedItem, folderRefs, isMenuOpen
 export default function Portfolio() {
   const [expandedItem, setExpandedItem] = useState<string | null>(null)
   const [isTransitioning, setIsTransitioning] = useState(false)
-  const [nextItem, setNextItem] = useState<string | null>(null)
   const folderRefs = useRef({})
   const menuRef = useRef<HTMLDivElement>(null)
 
@@ -219,10 +217,8 @@ export default function Portfolio() {
 
     if (expandedItem && expandedItem !== itemId) {
       setIsTransitioning(true)
-      setNextItem(itemId)
       setTimeout(() => {
         setExpandedItem(itemId)
-        setNextItem(null)
         setIsTransitioning(false)
       }, 300)
     } else {

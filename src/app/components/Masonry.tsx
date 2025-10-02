@@ -14,7 +14,7 @@ const useMedia = (queries: string[], values: number[], defaultValue: number): nu
     const handler = () => setValue(get());
     queries.forEach(q => matchMedia(q).addEventListener('change', handler));
     return () => queries.forEach(q => matchMedia(q).removeEventListener('change', handler));
-  }, [queries]);
+  }, [queries, get]);
 
   return value;
 };

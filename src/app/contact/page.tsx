@@ -1,5 +1,4 @@
 // pages/portfolio.tsx (or app/portfolio/page.tsx if using app router)
-import DarkVeil from '../components/DarkVeil';
 import Navigation from '../components/Navigation';
 
 export default function Contact() {

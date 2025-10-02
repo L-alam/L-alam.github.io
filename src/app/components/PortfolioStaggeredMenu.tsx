@@ -3,6 +3,7 @@
 import type React from "react"
 import { useCallback, useLayoutEffect, useRef, useState, useEffect } from "react"
 import { gsap } from "gsap"
+import Image from "next/image"
 
 export interface PortfolioItem {
   id: string
@@ -45,22 +46,6 @@ export const PortfolioStaggeredMenu: React.FC<PortfolioStaggeredMenuProps> = ({
   const openTlRef = useRef<gsap.core.Timeline | null>(null)
   const closeTweenRef = useRef<gsap.core.Tween | null>(null)
   const busyRef = useRef(false)
-
-  useEffect(() => {
-    if (isTransitioning && open) {
-      // Slide out current panel
-      playClose(false) // Don't call onMenuClose during transition
-    }
-  }, [isTransitioning])
-
-  // Auto-open when component mounts if autoOpen is true
-  useEffect(() => {
-    if (autoOpen && itemData && !openRef.current && !isTransitioning) {
-      openRef.current = true
-      setOpen(true)
-      setTimeout(() => playOpen(), 100) // Small delay to ensure DOM is ready
-    }
-  }, [autoOpen, itemData, isTransitioning])
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -230,6 +215,23 @@ export const PortfolioStaggeredMenu: React.FC<PortfolioStaggeredMenuProps> = ({
     [position, onMenuClose],
   )
 
+  // FIX: Move useEffect hooks AFTER function definitions to avoid hoisting issues
+  useEffect(() => {
+    if (isTransitioning && open) {
+      // Slide out current panel
+      playClose(false) // Don't call onMenuClose during transition
+    }
+  }, [isTransitioning, open, playClose])
+
+  // Auto-open when component mounts if autoOpen is true
+  useEffect(() => {
+    if (autoOpen && itemData && !openRef.current && !isTransitioning) {
+      openRef.current = true
+      setOpen(true)
+      setTimeout(() => playOpen(), 100) // Small delay to ensure DOM is ready
+    }
+  }, [autoOpen, itemData, isTransitioning, playOpen])
+
   const handleClose = () => {
     openRef.current = false
     setOpen(false)
@@ -240,7 +242,7 @@ export const PortfolioStaggeredMenu: React.FC<PortfolioStaggeredMenuProps> = ({
     <div className="sm-scope w-full h-full">
       <div
         className="staggered-menu-wrapper relative w-full h-full z-40"
-        style={accentColor ? ({ ["--sm-accent" as any]: accentColor } as React.CSSProperties) : undefined}
+        style={accentColor ? ({ ["--sm-accent"]: accentColor } as React.CSSProperties) : undefined}
         data-position={position}
         data-open={open || undefined}
       >
@@ -350,10 +352,12 @@ export const PortfolioStaggeredMenu: React.FC<PortfolioStaggeredMenuProps> = ({
             {/* Photo - simple slide in */}
             {itemData.photo && (
               <div className="portfolio-photo mt-6">
-                <img
+                <Image
                   src={itemData.photo || "/placeholder.svg"}
                   alt={`${itemData.title} preview`}
-                  className="w-full h-full object-cover rounded-lg"
+                  width={600}
+                  height={400}
+                  className="w-full h-auto object-cover rounded-lg"
                 />
               </div>
             )}

@@ -31,12 +31,12 @@ export default function Navigation() {
               <span className="absolute -bottom-2 left-0 w-full h-0.5 bg-white transform origin-left transition-transform duration-300"></span>
             )}
           </Link>
-          <Link href="/contact" className="text-gray-300 hover:text-white text-lg font-medium transition-all duration-300 relative" onClick={() => setActiveItem('Contact')}>
+          {/* <Link href="/contact" className="text-gray-300 hover:text-white text-lg font-medium transition-all duration-300 relative" onClick={() => setActiveItem('Contact')}>
             Contact
             {activeItem === 'Contact' && (
               <span className="absolute -bottom-2 left-0 w-full h-0.5 bg-white transform origin-left transition-transform duration-300"></span>
             )}
-          </Link>
+          </Link> */}
         </div>
         
         <div className="md:hidden flex items-center justify-between">
@@ -59,9 +59,9 @@ export default function Navigation() {
             <Link href="/blog" className="block py-3 text-gray-300 hover:text-white text-lg font-medium" onClick={() => { setActiveItem('Blog'); setIsMobileMenuOpen(false); }}>
               Blog
             </Link>
-            <Link href="/contact" className="block py-3 text-gray-300 hover:text-white text-lg font-medium" onClick={() => { setActiveItem('Contact'); setIsMobileMenuOpen(false); }}>
+            {/* <Link href="/contact" className="block py-3 text-gray-300 hover:text-white text-lg font-medium" onClick={() => { setActiveItem('Contact'); setIsMobileMenuOpen(false); }}>
               Contact
-            </Link>
+            </Link> */}
           </div>
         )}
       </div>
