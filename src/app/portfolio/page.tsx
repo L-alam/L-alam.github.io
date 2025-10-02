@@ -175,7 +175,7 @@ const FolderGrid: React.FC<FolderGridProps> = ({
           {row.map((item, itemIndex) => (
             <div key={item.id} className="flex flex-col items-center space-y-3">
               <div
-                ref={(el) => (folderRefs.current[item.id] = el)}
+                ref={(el) => { folderRefs.current[item.id] = el }}
                 className={`cursor-pointer transform transition-all duration-300 ease-out
                   hover:scale-110 hover:-translate-y-2 hover:rotate-1 hover:drop-shadow-2xl
                   active:scale-95 active:translate-y-0 active:rotate-0
