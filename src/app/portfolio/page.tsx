@@ -125,7 +125,7 @@ const portfolioData = {
       description: `Implemented distributed systems concepts in Go by recreating the MapReduce programming model for 
       large-scale data processing. Then reverse-engineering the RAFT consensus algorithm to simulate fault-tolerant 
       replication in real-world scenarios. Designed the system to handle node failures gracefully, ensuring consistency and reliability across distributed nodes`,
-      photo: "/images/raft.png",
+      photo: "/images/Raft.png",
     },
     {
       id: "project-5",
