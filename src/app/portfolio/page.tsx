@@ -3,7 +3,7 @@
 import Navigation from "../components/Navigation"
 import { useState, useRef } from "react"
 import Image from "next/image"
-import PortfolioStaggeredMenu from "../components/PortfolioStaggeredMenu"
+import PortfolioStaggeredMenu, { PortfolioItem } from "../components/PortfolioStaggeredMenu"
 
 const portfolioData = {
   experiences: [
@@ -142,7 +142,22 @@ const portfolioData = {
     },
   ],
 }
-const FolderGrid = ({ items, onFolderClick, expandedItem, folderRefs, isMenuOpen }) => {
+
+interface FolderGridProps {
+  items: PortfolioItem[];
+  onFolderClick: (item: PortfolioItem) => void;
+  expandedItem: PortfolioItem | null;
+  folderRefs: React.MutableRefObject<{ [key: string]: HTMLDivElement | null }>;
+  isMenuOpen: boolean;
+}
+
+const FolderGrid: React.FC<FolderGridProps> = ({ 
+  items, 
+  onFolderClick, 
+  expandedItem, 
+  folderRefs, 
+  isMenuOpen 
+}) => {
   const itemsPerRow = 5
   const rows = []
 
