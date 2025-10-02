@@ -29,7 +29,7 @@ const portfolioData = {
     {
       id: "experience-2",
       title: "Team Lead",
-      company: "Senator Ed Markey's Office",
+      company: "Senator Ed Markey&apos;s Office",
       time: "February - June 2024",
       skillColor: "bg-blue-500/20",
       skills: ["Python", "Pandas", "Pygeo", "SQL", "Tableau", "Google Earth API"],
@@ -63,8 +63,8 @@ const portfolioData = {
       skillColor: "bg-purple-500/20",
       skills: ["React Native", "Typescript", "Supabase", "OpenAI API", "Stripe API"],
       links: [
-        { label: "Github", url: "https://github.com/L-alam/amongyall", icon: Github },
-        { label: "Demo", url: "#", icon: ExternalLink },
+        { label: "Github", url: "https://github.com/L-alam/amongyall"},
+        { label: "Demo", url: "#"},
       ],
       description: `Created a mobile board game app to play with friends. Developed with React Native and Expo, 
       featuring three distinct game modes, dynamic player management, and customizable user elements. Engineered 
@@ -83,7 +83,7 @@ const portfolioData = {
       skillColor: "bg-purple-500/20",
       skills: ["Kotlin", "SQL", "Google Maps/Calendar API", "Exercise DB"],
       links: [
-        { label: "Code", url: "https://github.com/Mussie0001/CS501-Final-Project-Momentum", icon: Github },
+        { label: "Code", url: "https://github.com/Mussie0001/CS501-Final-Project-Momentum"},
       ],
       description: `Momentum is a productivity-focused Android application built with Kotlin and Room DB that 
       enables users to create, track, and visualize daily habits. The app automates physical activity tracking 
@@ -101,7 +101,7 @@ const portfolioData = {
       skillColor: "bg-purple-500/20",
       skills: ["Java"],
       links: [
-        { label: "Code", url: "https://github.com/L-alam/Pokemon-bot", icon: Github },
+        { label: "Code", url: "https://github.com/L-alam/Pokemon-bot"},
       ],
       description: `Developed a Pokémon Battle AI Agent in Java that uses a stochastic minimax algorithm with 
       aggressive alpha-beta pruning to efficiently evaluate potential moves and outcomes. Implemented tree traversal 
@@ -119,7 +119,7 @@ const portfolioData = {
       skillColor: "bg-purple-500/20",
       skills: ["GoLang"],
       links: [
-        { label: "Code", url: "https://github.com/L-alam/3PC-golang", icon: Github },
+        { label: "Code", url: "https://github.com/L-alam/3PC-golang"},
       ],
       description: `Implemented distributed systems concepts in Go by recreating the MapReduce programming model for 
       large-scale data processing. Then reverse-engineering the RAFT consensus algorithm to simulate fault-tolerant 
@@ -134,7 +134,7 @@ const portfolioData = {
       skillColor: "bg-purple-500/20",
       skills: ["Django, Javascript, "],
       links: [
-        { label: "Code", url: "https://github.com/L-alam/CS-412", icon: Github },
+        { label: "Code", url: "https://github.com/L-alam/CS-412"},
       ],
       description: `Built a group trip planning page using Django. Implemented proper Django authentication forms to create users.
       Allowing them to build travel portfolios and trip planning dashboards while able interact with the real time changes of other users.

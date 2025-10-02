@@ -94,10 +94,10 @@ export default function HomePage() {
                 <h2 className="text-xl font-bold text-gray-300 mb-4 inline-block border-b-2 border-white/30 pb-2">About Me</h2>
                 <div className="bg-transparent">
                   <p className="text-md text-white-400 leading-relaxed pb-10">
-                    Hey, I'm Labeeb! I'm a computer science student at Boston University with experience 
-                    across full-stack development, mobile applications, and distributed systems. I've had the opportunity to work 
-                    at Hyundai Autoever America optimizing support systems for connected vehicles, and with Senator Ed Markey's 
-                    office analyzing federal budget allocations. I'm passionate about building scalable solutions for mobile games, 
+                    Hey, I&apos;m Labeeb! I&apos;m a computer science student at Boston University with experience 
+                    across full-stack development, mobile applications, and distributed systems. I&apos;ve had the opportunity to work 
+                    at Hyundai Autoever America optimizing support systems for connected vehicles, and with Senator Ed Markey&apos;s 
+                    office analyzing federal budget allocations. I&apos;m passionate about building scalable solutions for mobile games, 
                    distributed computing systems, solving complex problems and creating impactful solutions.
                   </p>
                 </div>

@@ -36,7 +36,7 @@ export default function Resume() {
               title="Resume PDF Viewer"
             >
               <p className="p-4 text-center text-gray-600">
-                Your browser doesn't support PDF viewing. 
+                Your browser doesn&apos;t support PDF viewing. 
                 <a href="/resume.pdf" className="text-blue-600 hover:underline ml-1">
                   Download the PDF instead
                 </a>

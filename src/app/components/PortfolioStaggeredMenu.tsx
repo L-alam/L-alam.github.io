@@ -11,7 +11,7 @@ export interface PortfolioItem {
   time?: string | null
   skillColor: string
   skills: string[]
-  links: { label: string; url: string; icon: any }[]
+  links: { label: string; url: string;}[]
   description: string
   photo?: string | null
 }
