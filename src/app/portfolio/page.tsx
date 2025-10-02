@@ -88,7 +88,7 @@ const portfolioData = {
       ],
       description: `Momentum is a productivity-focused Android application built with Kotlin and Room DB that 
       enables users to create, track, and visualize daily habits. The app automates physical activity tracking 
-      using Android’s Step Counter Sensor, displays motivational quotes via the ZenQuotes API, and provides 
+      using Android's Step Counter Sensor, displays motivational quotes via the ZenQuotes API, and provides 
       calendar-based progress visualization with daily, weekly, and monthly views. Momentum supports cross-device 
       synchronization between smartphones and Wear OS smartwatches, offering adaptive layouts for different 
       screen orientations and a seamless user experience across devices..`,
@@ -160,63 +160,48 @@ const FolderGrid: React.FC<FolderGridProps> = ({
   folderRefs, 
   isMenuOpen 
 }) => {
-  const itemsPerRow = 5
-  const rows = []
-
-  for (let i = 0; i < items.length; i += itemsPerRow) {
-    rows.push(items.slice(i, i + itemsPerRow))
-  }
-
   return (
-    <div className="space-y-12 transition-all duration-500 ease-out">
-      {rows.map((row, rowIndex) => (
-        <div
-          key={rowIndex}
-          className={`grid grid-cols-5 mx-8 transition-all duration-500 ease-out ${isMenuOpen ? "gap-2" : "gap-8"}`}
-        >
-          {row.map((item, itemIndex) => (
-            <div key={item.id} className="flex flex-col items-center space-y-3">
-              <div
-                ref={(el) => { folderRefs.current[item.id] = el }}
-                className={`cursor-pointer transform transition-all duration-300 ease-out
-                  hover:scale-110 hover:-translate-y-2 hover:rotate-1 hover:drop-shadow-2xl
-                  active:scale-95 active:translate-y-0 active:rotate-0
-                  ${expandedItem?.id === item.id ? "scale-105 -translate-y-1 drop-shadow-xl" : ""}
-                  group relative`}
-                onClick={() => onFolderClick(item)}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.filter = "drop-shadow(0 0 20px rgba(82, 39, 255, 0.3))"
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.filter = ""
-                }}
-                style={{
-                  animation: "float 3s ease-in-out infinite",
-                  animationDelay: `${itemIndex * 0.2}s`,
-                }}
-              >
-                <div className="w-20 h-20 relative">
-                  <div className="absolute inset-0 bg-[#DEE6DE]/20 rounded-lg blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse" />
-                  <Image
-                    src="/images/folder-icon-white.png"
-                    alt="Folder"
-                    width={80}
-                    height={80}
-                    className="drop-shadow-lg relative z-10 transition-all duration-300 group-hover:brightness-110"
-                  />
-                  <div className="absolute inset-0 bg-white/20 rounded-lg opacity-0 group-active:opacity-100 group-active:animate-ping" />
-                  <div className="absolute inset-0 bg-[#DEE6DE]/30 rounded-lg opacity-0 group-active:opacity-100 group-active:animate-pulse" />
-                </div>
-              </div>
-              <div className="text-center max-w-[160px] transition-all duration-300 group-hover:scale-105">
-                <h3 className="text-white font-semibold text-lg leading-tight mb-1 break-words">{item.company}</h3>
-                <p className="text-gray-100 text-xs mt-2 text-base leading-tight break-words">{item.time}</p>
-              </div>
+    <div className={`grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 mx-4 sm:mx-8 transition-all duration-500 ease-out ${
+      isMenuOpen ? "gap-2 sm:gap-3 md:gap-4" : "gap-4 sm:gap-6 md:gap-8"
+    }`}>
+      {items.map((item, itemIndex) => (
+        <div key={item.id} className="flex flex-col items-center space-y-3">
+          <div
+            ref={(el) => { folderRefs.current[item.id] = el }}
+            className={`cursor-pointer transform transition-all duration-300 ease-out
+              hover:scale-110 hover:-translate-y-2 hover:rotate-1 hover:drop-shadow-2xl
+              active:scale-95 active:translate-y-0 active:rotate-0
+              ${expandedItem?.id === item.id ? "scale-105 -translate-y-1 drop-shadow-xl" : ""}
+              group relative`}
+            onClick={() => onFolderClick(item)}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.filter = "drop-shadow(0 0 20px rgba(82, 39, 255, 0.3))"
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.filter = ""
+            }}
+            style={{
+              animation: "float 3s ease-in-out infinite",
+              animationDelay: `${itemIndex * 0.2}s`,
+            }}
+          >
+            <div className="w-16 h-16 sm:w-20 sm:h-20 relative">
+              <div className="absolute inset-0 bg-[#DEE6DE]/20 rounded-lg blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse" />
+              <Image
+                src="/images/folder-icon-white.png"
+                alt="Folder"
+                width={80}
+                height={80}
+                className="drop-shadow-lg relative z-10 transition-all duration-300 group-hover:brightness-110"
+              />
+              <div className="absolute inset-0 bg-white/20 rounded-lg opacity-0 group-active:opacity-100 group-active:animate-ping" />
+              <div className="absolute inset-0 bg-[#DEE6DE]/30 rounded-lg opacity-0 group-active:opacity-100 group-active:animate-pulse" />
             </div>
-          ))}
-          {Array.from({ length: itemsPerRow - row.length }).map((_, index) => (
-            <div key={`empty-${index}`} />
-          ))}
+          </div>
+          <div className="text-center max-w-[120px] sm:max-w-[160px] transition-all duration-300 group-hover:scale-105">
+            <h3 className="text-white font-semibold text-sm sm:text-base md:text-lg leading-tight mb-1 break-words">{item.company}</h3>
+            <p className="text-gray-100 text-xs sm:text-sm leading-tight break-words">{item.time}</p>
+          </div>
         </div>
       ))}
     </div>
@@ -264,8 +249,8 @@ export default function Portfolio() {
         <Navigation />
         <main className="max-w-6xl mx-auto px-4 py-12">
           <section className="mb-20">
-            <div className="mb-12 mx-8">
-              <h2 className="text-3xl font-bold text-white mb-4">Experience:</h2>
+            <div className="mb-8 sm:mb-12 mx-4 sm:mx-8">
+              <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Experience:</h2>
             </div>
             <FolderGrid
               items={portfolioData.experiences}
@@ -276,8 +261,8 @@ export default function Portfolio() {
             />
           </section>
           <section className="mb-20">
-            <div className="mb-12 mx-8">
-              <h2 className="text-3xl font-bold text-white mb-4">Projects:</h2>
+            <div className="mb-8 sm:mb-12 mx-4 sm:mx-8">
+              <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Projects:</h2>
             </div>
             <FolderGrid
               items={portfolioData.projects}
