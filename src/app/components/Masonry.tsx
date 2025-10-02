@@ -1,11 +1,12 @@
-import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useMemo, useRef, useState, useCallback } from 'react';
 import { gsap } from 'gsap';
 
 const useMedia = (queries: string[], values: number[], defaultValue: number): number => {
-  const get = () => {
+  // FIX 1: Wrap 'get' in useCallback to fix the dependency warning
+  const get = useCallback(() => {
     if (typeof window === 'undefined') return defaultValue;
     return values[queries.findIndex(q => matchMedia(q).matches)] ?? defaultValue;
-  };
+  }, [queries, values, defaultValue]);
 
   const [value, setValue] = useState<number>(defaultValue);
 
@@ -14,7 +15,7 @@ const useMedia = (queries: string[], values: number[], defaultValue: number): nu
     const handler = () => setValue(get());
     queries.forEach(q => matchMedia(q).addEventListener('change', handler));
     return () => queries.forEach(q => matchMedia(q).removeEventListener('change', handler));
-  }, [queries, get]);
+  }, [queries, get]); // Now 'get' is stable and included
 
   return value;
 };
@@ -94,7 +95,8 @@ const Masonry: React.FC<MasonryProps> = ({
   const [containerRef, { width }] = useMeasure<HTMLDivElement>();
   const [imagesReady, setImagesReady] = useState(false);
 
-  const getInitialPosition = (item: GridItem) => {
+  // FIX 2: Wrap getInitialPosition in useCallback
+  const getInitialPosition = useCallback((item: GridItem) => {
     if (typeof window === 'undefined') return { x: item.x, y: item.y };
     
     const containerRect = containerRef.current?.getBoundingClientRect();
@@ -123,7 +125,7 @@ const Masonry: React.FC<MasonryProps> = ({
       default:
         return { x: item.x, y: item.y + 100 };
     }
-  };
+  }, [animateFrom, containerRef]);
 
   useEffect(() => {
     preloadImages(items.map(i => i.img)).then(() => setImagesReady(true));
@@ -188,7 +190,7 @@ const Masonry: React.FC<MasonryProps> = ({
     });
 
     hasMounted.current = true;
-  }, [grid, imagesReady, stagger, animateFrom, blurToFocus, duration, ease]);
+  }, [grid, imagesReady, stagger, animateFrom, blurToFocus, duration, ease, getInitialPosition]); // Added getInitialPosition
 
   const handleMouseEnter = (id: string) => {
     const imageContainer = document.querySelector(`[data-key="${id}"] .image-bg`);

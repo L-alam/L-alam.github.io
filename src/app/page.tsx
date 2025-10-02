@@ -1,5 +1,4 @@
 // In your page.tsx file
-import DarkVeil from './components/DarkVeil';
 import Navigation from './components/Navigation';
 import Image from 'next/image';
 import TextType from './components/TextType';
