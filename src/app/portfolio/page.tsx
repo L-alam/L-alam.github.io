@@ -32,6 +32,7 @@ const portfolioData = {
       time: "February - June 2024",
       skillColor: "bg-blue-500/20",
       skills: ["Python", "Pandas", "Pygeo", "SQL", "Tableau", "Google Earth API"],
+      links: [],
       description: `Led a team of six analyzing $2.5M in federal earmark allocations using Python, 
       SQL, and geospatial analysis to make a plan for equitable distribution of resources for the state of Massachusetts. 
       We developed an automated tracking systems with Pandas, PyGeo, and Google Earth API to 
@@ -47,6 +48,7 @@ const portfolioData = {
       time: "September - November 2023",
       skillColor: "bg-blue-500/20",
       skills: ["Django", "Node.js"],
+      links: [],
       description: `Developed a full-stack prototype using Django and Node.js to connect laid-off workers 
       with potential employers. Implemented user authentication workflows and a clean, intuitive UI/UX, 
       establishing a strong technical foundation for future development.`,
@@ -179,9 +181,9 @@ const FolderGrid: React.FC<FolderGridProps> = ({
                 className={`cursor-pointer transform transition-all duration-300 ease-out
                   hover:scale-110 hover:-translate-y-2 hover:rotate-1 hover:drop-shadow-2xl
                   active:scale-95 active:translate-y-0 active:rotate-0
-                  ${expandedItem === item.id ? "scale-105 -translate-y-1 drop-shadow-xl" : ""}
+                  ${expandedItem?.id === item.id ? "scale-105 -translate-y-1 drop-shadow-xl" : ""}
                   group relative`}
-                onClick={() => onFolderClick(item.id)}
+                onClick={() => onFolderClick(item)}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.filter = "drop-shadow(0 0 20px rgba(82, 39, 255, 0.3))"
                 }}
@@ -222,37 +224,28 @@ const FolderGrid: React.FC<FolderGridProps> = ({
 }
 
 export default function Portfolio() {
-  const [expandedItem, setExpandedItem] = useState<string | null>(null)
-  const [isTransitioning, setIsTransitioning] = useState(false)
-  const folderRefs = useRef({})
-  const menuRef = useRef<HTMLDivElement>(null)
+  const [expandedItem, setExpandedItem] = useState<PortfolioItem | null>(null);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const folderRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+  const menuRef = useRef<HTMLDivElement>(null);
 
-  const handleFolderClick = (itemId: string) => {
-    if (expandedItem === itemId) return
-
-    if (expandedItem && expandedItem !== itemId) {
-      setIsTransitioning(true)
+  const handleFolderClick = (item: PortfolioItem) => {
+    if (expandedItem?.id === item.id) return;
+    
+    if (expandedItem && expandedItem.id !== item.id) {
+      setIsTransitioning(true);
       setTimeout(() => {
-        setExpandedItem(itemId)
-        setIsTransitioning(false)
-      }, 300)
+        setExpandedItem(item);
+        setIsTransitioning(false);
+      }, 300);
     } else {
-      setExpandedItem(itemId)
+      setExpandedItem(item);
     }
-  }
+  };
 
   const handleCloseDetails = () => {
-    setExpandedItem(null)
-  }
-
-  const getExpandedItemData = () => {
-    if (!expandedItem) return null
-
-    const allItems = [...portfolioData.experiences, ...portfolioData.projects]
-    return allItems.find((item) => item.id === expandedItem)
-  }
-
-  const expandedItemData = getExpandedItemData()
+    setExpandedItem(null);
+  };
 
   return (
     <div className="min-h-screen relative">
@@ -266,18 +259,14 @@ export default function Portfolio() {
           }
         }
       `}</style>
-
       <div className="fixed inset-0 z-0 bg-[#297373]"></div>
-
       <div className="relative z-10">
         <Navigation />
-
         <main className="max-w-6xl mx-auto px-4 py-12">
           <section className="mb-20">
             <div className="mb-12 mx-8">
               <h2 className="text-3xl font-bold text-white mb-4">Experience:</h2>
             </div>
-
             <FolderGrid
               items={portfolioData.experiences}
               onFolderClick={handleFolderClick}
@@ -286,12 +275,10 @@ export default function Portfolio() {
               isMenuOpen={!!expandedItem}
             />
           </section>
-
           <section className="mb-20">
             <div className="mb-12 mx-8">
               <h2 className="text-3xl font-bold text-white mb-4">Projects:</h2>
             </div>
-
             <FolderGrid
               items={portfolioData.projects}
               onFolderClick={handleFolderClick}
@@ -302,13 +289,12 @@ export default function Portfolio() {
           </section>
         </main>
       </div>
-
-      {expandedItemData && (
+      {expandedItem && (
         <div ref={menuRef} className="fixed inset-0 z-40 pointer-events-none">
           <PortfolioStaggeredMenu
-            key={expandedItem}
+            key={expandedItem.id}
             position="right"
-            itemData={expandedItemData}
+            itemData={expandedItem}
             colors={["#CBF7ED", "#174F4F"]}
             accentColor="#174F4F"
             onMenuClose={handleCloseDetails}
@@ -318,5 +304,5 @@ export default function Portfolio() {
         </div>
       )}
     </div>
-  )
+  );
 }
