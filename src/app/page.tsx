@@ -5,6 +5,7 @@ import TextType from './components/TextType';
 import { Github, Linkedin, FileText } from 'lucide-react';
 import Link from 'next/link';
 
+
 export default function HomePage() {
   return (
     <div className="min-h-screen relative">
