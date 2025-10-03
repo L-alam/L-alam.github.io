@@ -50,7 +50,7 @@ export default function Resume() {
               Having trouble viewing the resume above?
             </p>
             <a 
-              href="/resume.pdf" 
+              href="/assets/resume.pdf" 
               target="_blank" 
               rel="noopener noreferrer"
               className="inline-block bg-white text-[#297373] px-6 py-2 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
