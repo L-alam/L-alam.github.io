@@ -18,7 +18,7 @@ export default function SchedulePage() {
             {/* Header Section */}
             <div className="text-center mb-8 md:mb-12">
               <p className="text-base sm:text-lg text-gray-300 max-w-2xl mx-auto px-4">
-                Thanks for accepting my invite to chat, pick a time that works best for you.
+                My availablity outside of class:
               </p>
             </div>
 
