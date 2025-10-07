@@ -2,7 +2,7 @@
 import Navigation from './components/Navigation';
 import Image from 'next/image';
 import TextType from './components/TextType';
-import { Github, Linkedin, FileText } from 'lucide-react';
+import { Github, Linkedin, FileText, Calendar } from 'lucide-react';
 import Link from 'next/link';
 
 
@@ -82,6 +82,14 @@ export default function HomePage() {
               >
                 <Linkedin size={18} className="sm:w-5 sm:h-5 text-white" fill="white"/>
               </a>
+
+              {/* Schedule Meeting Icon */}
+              <Link 
+                href="/schedule"
+                className="bg-blue-500 hover:bg-blue-800 p-2.5 sm:p-3 rounded-lg transition-colors duration-300"
+              >
+                <Calendar size={18} className="sm:w-5 sm:h-5 text-white" />
+              </Link>
             </div>
 
             {/* About Me Section - Responsive margins */}
