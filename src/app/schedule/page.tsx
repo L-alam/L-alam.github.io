@@ -3,7 +3,6 @@
 
 import { useEffect } from 'react';
 import Navigation from '../components/Navigation';
-import { Calendar } from 'lucide-react';
 
 export default function SchedulePage() {
   useEffect(() => {
@@ -14,12 +13,12 @@ export default function SchedulePage() {
     document.body.appendChild(script);
 
     script.onload = () => {
-      // @ts-ignore
+      // @ts-expect-error
       if (window.Cal) {
-        // @ts-ignore
+        // @ts-expect-error
         window.Cal('init', { origin: 'https://cal.com' });
         
-        // @ts-ignore
+        // @ts-expect-error
         window.Cal('inline', {
           elementOrSelector: '#cal-inline-embed',
           calLink: 'labeeb_alam/30min',
