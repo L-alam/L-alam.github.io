@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import Navigation from './components/Navigation';
 import Image from 'next/image';
-import { Github, Linkedin, FileText, Calendar } from 'lucide-react';
+import { Github, Linkedin, FileText, Calendar, ChevronRight, ChevronDown } from 'lucide-react';
 import Link from 'next/link';
 
 const containerVariants = {
@@ -43,6 +43,24 @@ export default function HomePage() {
         />
       </div>
 
+      {/* Desktop: fixed chevron-right on right edge */}
+      <motion.div
+        className="hidden lg:flex fixed right-5 top-1/2 -translate-y-1/2 z-20"
+        initial={{ opacity: 0, x: 10 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.5, delay: 0.8 }}
+      >
+        <Link href="/portfolio">
+          <motion.div
+            className="text-white/40 hover:text-white transition-colors duration-300"
+            whileHover={{ x: 3 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <ChevronRight size={48} strokeWidth={1.5} />
+          </motion.div>
+        </Link>
+      </motion.div>
+
       <div className="relative z-10">
         <Navigation />
 
@@ -60,7 +78,7 @@ export default function HomePage() {
                 animate="show"
               >
                 <motion.p variants={itemVariants} className="eyebrow">
-                  Computer Science · Boston University
+                  Software Engineer · CS Grad @ Boston University
                 </motion.p>
 
                 <motion.h1
@@ -91,7 +109,7 @@ export default function HomePage() {
                     whileTap={{ scale: 0.97 }}
                   >
                     <FileText size={15} />
-                    <span>Resume / CV</span>
+                    <span>Resume</span>
                   </motion.a>
 
                   <motion.a
@@ -118,18 +136,19 @@ export default function HomePage() {
                     <span>LinkedIn</span>
                   </motion.a>
 
-                  <motion.div whileHover={{ scale: 1.03, y: -2 }} whileTap={{ scale: 0.97 }}>
+                  {/* <motion.div whileHover={{ scale: 1.03, y: -2 }} whileTap={{ scale: 0.97 }}>
                     <Link href="/schedule" className="animated-btn animated-btn-secondary">
                       <Calendar size={15} />
                       <span>Schedule</span>
                     </Link>
-                  </motion.div>
+                  </motion.div> */}
                 </motion.div>
 
                 <motion.div variants={itemVariants} className="flex flex-wrap gap-3">
                   <span className="chip">Full-Stack</span>
-                  <span className="chip chip-accent">Mobile + AI</span>
-                  <span className="chip chip-gold">Distributed Systems</span>
+                  <span className="chip">Mobile Dev</span>
+                  <span className="chip">AI</span>
+                  <span className="chip">Distributed Systems</span>
                 </motion.div>
               </motion.div>
 
@@ -142,7 +161,7 @@ export default function HomePage() {
               >
                 <div className="relative flex items-center justify-center">
                 {/* circular image only */}
-                <div className="w-64 h-64 sm:w-72 sm:h-72 rounded-full overflow-hidden shadow-2xl">
+                <div className="w-72 h-72 sm:w-80 sm:h-80 rounded-full overflow-hidden shadow-2xl">
                   <Image
                     src="/images/profile.png"
                     alt="Labeeb Alam"
@@ -167,7 +186,7 @@ export default function HomePage() {
               <h2 className="text-xl font-bold text-white/70 mb-4 inline-block border-b-2 border-white/30 pb-2">
                 About Me
               </h2>
-              <p className="text-white/90 text-base md:text-lg leading-relaxed max-w-3xl">
+              <p className="text-white/90 text-base md:text-lg leading-relaxed w-full">
                 Hey, I&apos;m Labeeb! I&apos;m a computer science student at Boston University with experience
                 across full-stack development, mobile applications, and distributed systems. I&apos;ve had the
                 opportunity to work at Hyundai Autoever America optimizing support systems for connected
@@ -177,8 +196,27 @@ export default function HomePage() {
               </p>
             </motion.div>
 
-            {/* 3-column cards */}
+            {/* Mobile: chevron-down below About Me */}
             <motion.div
+              className="flex justify-center mb-4 lg:hidden"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+            >
+              <Link href="/portfolio">
+                <motion.div
+                  className="text-white/50 hover:text-white transition-colors duration-300"
+                  whileHover={{ y: 3 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <ChevronDown size={28} strokeWidth={1.5} />
+                </motion.div>
+              </Link>
+            </motion.div>
+
+            {/* 3-column cards */}
+            {/* <motion.div
               className="grid gap-5 md:grid-cols-3 mb-12"
               variants={containerVariants}
               initial="hidden"
@@ -209,23 +247,8 @@ export default function HomePage() {
                   <p className="mt-2 text-sm text-white/65">{item.text}</p>
                 </motion.div>
               ))}
-            </motion.div>
+            </motion.div> */}
 
-            {/* Portfolio link */}
-            <motion.div
-              className="text-center"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-            >
-              <Link
-                href="/portfolio"
-                className="text-white text-lg font-medium hover:text-white/70 transition-colors duration-300"
-              >
-                Portfolio &gt;
-              </Link>
-            </motion.div>
 
           </div>
         </main>
