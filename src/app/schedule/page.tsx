@@ -13,12 +13,12 @@ export default function SchedulePage() {
     document.body.appendChild(script);
 
     script.onload = () => {
-      // @ts-expect-error
+      // @ts-expect-error Cal is injected by the embed script at runtime
       if (window.Cal) {
-        // @ts-expect-error
+        // @ts-expect-error Cal is injected by the embed script at runtime
         window.Cal('init', { origin: 'https://cal.com' });
         
-        // @ts-expect-error
+        // @ts-expect-error Cal is injected by the embed script at runtime
         window.Cal('inline', {
           elementOrSelector: '#cal-inline-embed',
           calLink: 'labeeb_alam/30min',
