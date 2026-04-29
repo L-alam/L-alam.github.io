@@ -1,8 +1,43 @@
 // app/schedule/page.tsx
+'use client';
+
+import { useEffect } from 'react';
 import Navigation from '../components/Navigation';
 import { Calendar } from 'lucide-react';
 
 export default function SchedulePage() {
+  useEffect(() => {
+    // Load Cal.com embed script
+    const script = document.createElement('script');
+    script.src = 'https://app.cal.com/embed/embed.js';
+    script.async = true;
+    document.body.appendChild(script);
+
+    script.onload = () => {
+      // @ts-ignore
+      if (window.Cal) {
+        // @ts-ignore
+        window.Cal('init', { origin: 'https://cal.com' });
+        
+        // @ts-ignore
+        window.Cal('inline', {
+          elementOrSelector: '#cal-inline-embed',
+          calLink: 'labeeb_alam/30min',
+          layout: 'week_view',
+          config: {
+            theme: 'light'
+          }
+        });
+      }
+    };
+
+    return () => {
+      if (document.body.contains(script)) {
+        document.body.removeChild(script);
+      }
+    };
+  }, []);
+
   return (
     <div className="min-h-screen relative">
       {/* Background - fixed and full screen */}
@@ -14,26 +49,21 @@ export default function SchedulePage() {
         
         {/* Main Content */}
         <main className="container mx-auto px-4 sm:px-8 py-12">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-6xl mx-auto">
             {/* Header Section */}
             <div className="text-center mb-8 md:mb-12">
               <p className="text-base sm:text-lg text-gray-300 max-w-2xl mx-auto px-4">
-                My availablity outside of class:
+                My availability outside of class:
               </p>
             </div>
 
-            {/* Calendar Embed Container */}
-            <div className="bg-white/95 rounded-2xl shadow-2xl overflow-hidden border-4 border-white/20">
-              <div className="w-full" style={{ minHeight: '600px' }}>
-                <iframe 
-                  src="https://cal.com/labeeb_alam/30min?layout=week_view" 
-                  width="100%" 
-                  height="700px" 
-                  frameBorder="0"
-                  style={{ border: 0 }}
-                  title="Schedule a meeting with Labeeb Alam"
-                />
-              </div>
+            {/* Calendar Embed - Using inline embed for better control */}
+            <div className="bg-white/95 rounded-2xl shadow-2xl overflow-hidden border-4 border-white/20 p-4">
+              <div 
+                id="cal-inline-embed" 
+                className="w-full"
+                style={{ minHeight: '700px' }}
+              ></div>
             </div>
 
             {/* Optional: Info Section Below Calendar */}

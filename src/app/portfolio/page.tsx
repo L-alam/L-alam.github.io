@@ -3,6 +3,7 @@
 import Navigation from "../components/Navigation"
 import { useState, useRef } from "react"
 import Image from "next/image"
+import { motion } from "framer-motion"
 import PortfolioStaggeredMenu, { PortfolioItem } from "../components/PortfolioStaggeredMenu"
 
 const portfolioData = {
@@ -247,7 +248,12 @@ export default function Portfolio() {
       <div className="fixed inset-0 z-0 bg-[#297373]"></div>
       <div className="relative z-10">
         <Navigation />
-        <main className="max-w-6xl mx-auto px-4 py-12">
+        <motion.main
+          className="max-w-6xl mx-auto px-4 py-12"
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+        >
           <section className="mb-20">
             <div className="mb-8 sm:mb-12 mx-4 sm:mx-8">
               <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Experience:</h2>
@@ -272,7 +278,7 @@ export default function Portfolio() {
               isMenuOpen={!!expandedItem}
             />
           </section>
-        </main>
+        </motion.main>
       </div>
       {expandedItem && (
         <div ref={menuRef} className="fixed inset-0 z-40 pointer-events-none">
