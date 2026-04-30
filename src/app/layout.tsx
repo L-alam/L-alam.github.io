@@ -28,12 +28,15 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="fixed inset-0 z-0 overflow-hidden" style={{ position: 'fixed', inset: 0 }}>
-            <Grainient
-              color1="#456990"
-              color2="#114B5F"
-              color3="#BED7DA"
-            />
+        {/* Mobile: solid background */}
+        <div className="fixed inset-0 z-0 lg:hidden" style={{ background: '#658C6E' }} />
+        {/* Desktop: animated gradient */}
+        <div className="fixed inset-0 z-0 hidden lg:block overflow-hidden">
+          <Grainient
+            color1="#456990"
+            color2="#114B5F"
+            color3="#BED7DA"
+          />
         </div>
         {children}
       </body>
