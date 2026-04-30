@@ -245,7 +245,6 @@ export default function Portfolio() {
           }
         }
       `}</style>
-      <div className="fixed inset-0 z-0 bg-[#297373]"></div>
       <div className="relative z-10">
         <Navigation />
         <motion.main

@@ -100,7 +100,6 @@ export default function Blog() {
   return (
     <div className="min-h-screen relative">
       {/* Background */}
-      <div className="fixed inset-0 z-0 bg-[#297373]"></div>
       
       {/* Content overlay */}
       <div className="relative z-10">

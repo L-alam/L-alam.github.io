@@ -25,7 +25,6 @@ const itemVariants = {
 export default function HomePage() {
   return (
     <div className="min-h-screen relative">
-      <div className="fixed inset-0 z-0 bg-[#297373]" />
 
       {/* Floating orbs */}
       <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
