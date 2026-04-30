@@ -29,7 +29,11 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <div className="fixed inset-0 z-0 overflow-hidden" style={{ position: 'fixed', inset: 0 }}>
-          <Grainient />
+            <Grainient
+              color1="#456990"
+              color2="#114B5F"
+              color3="#BED7DA"
+            />
         </div>
         {children}
       </body>

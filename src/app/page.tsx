@@ -55,7 +55,7 @@ export default function HomePage() {
             whileHover={{ x: 3 }}
             whileTap={{ scale: 0.95 }}
           >
-            <ChevronRight size={48} strokeWidth={1.5} />
+            <ChevronRight size={48} strokeWidth={3} />
           </motion.div>
         </Link>
       </motion.div>
