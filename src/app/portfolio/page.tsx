@@ -9,6 +9,17 @@ import PortfolioStaggeredMenu, { PortfolioItem } from "../components/PortfolioSt
 const portfolioData = {
   experiences: [
     {
+      id: "experience-4",
+      title: "Software Engineer",
+      company: "ALT - Software Engineer",
+      time: "May 2026",
+      skillColor: "bg-blue-500/20",
+      skills: ["Flutter"],
+      links: [],
+      description: `Working on a new social platform for AI generated content`,
+      photo: "",
+    },
+    {
       id: "experience-1",
       title: "SWE Intern",
       company: "Hyundai AutoEver America",
@@ -57,6 +68,39 @@ const portfolioData = {
     },
   ],
   projects: [
+    { 
+      id: "project-8",
+      title: "",
+      company: "Chrome Browser Agent",
+      time: "February 2026",
+      skillColor: "bg-purple-500/20",
+      skills: ["Python", "Claude API", "LangSmith", "Docker"],
+      links: [],
+      description: `Built an autonomous AI agent that navigates and fills out job applications end-to-end across multiple ATS platforms 
+      using a browser automation pipeline powered by Claude. Designed an observe→plan→act agent loop with a batch action planning architecture 
+      that reduced LLM API costs by 60% by grouping multiple actions per inference call. Used a JavaScript-based DOM extraction system 
+      that converts raw web pages into a structured representation the model can reason about, with dynamic dropdown pre-probing to minimize 
+      unnecessary API round-trips. Implemented Pydantic runtime schema validation for robust action parsing, and built loop detection with 
+      cross-batch failure classification to prevent the agent from getting stuck in repeated action cycles. Instrumented with LangSmith for 
+      full observability across LLM calls, token usage, and cost per agent run, and containerized with Docker for portable deployment`,
+      photo: [],
+    },
+    { 
+      id: "project-7",
+      title: "",
+      company: "GIT from Scratch (Python)",
+      time: "January 2026",
+      skillColor: "bg-purple-500/20",
+      skills: ["Node.js", "TypeScript", "React Native", "PostgreSQL", "Expo"],
+      links: [],
+      description: `Built a from-scratch reimplementation of Git's core internals in Python, replicating key commands including 
+      init, hash-object, cat-file, write-tree, commit-tree, and clone. Engineered Git's content-addressed object storage model 
+      using SHA-1 hashing and zlib compression, and implemented binary serialization and parsing for blob, tree, and commit object formats. 
+      Developed a fully functional clone command by implementing Git's Smart HTTP transfer protocol from scratch — including pkt-line framing, 
+      PACK file parsing, delta reconstruction, and recursive working tree checkout — capable of cloning real public 
+      GitHub repositories without any Git libraries.`,
+      photo: [],
+    },
     { 
       id: "project-6",
       title: "",
