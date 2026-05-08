@@ -14,7 +14,7 @@ export interface PortfolioItem {
   skills: string[]
   links: { label: string; url: string;}[]
   description: string
-  photo?: string | null
+  photo?: string | string[] | null
 }
 
 export interface PortfolioStaggeredMenuProps {
@@ -352,13 +352,29 @@ export const PortfolioStaggeredMenu: React.FC<PortfolioStaggeredMenuProps> = ({
             {/* Photo - simple slide in */}
             {itemData.photo && (
               <div className="portfolio-photo mt-6">
-                <Image
-                  src={itemData.photo || "/placeholder.svg"}
-                  alt={`${itemData.title} preview`}
-                  width={600}
-                  height={400}
-                  className="w-full h-auto object-cover rounded-lg"
-                />
+                {Array.isArray(itemData.photo) ? (
+                  <div className="flex flex-row gap-3 overflow-x-auto pb-2 snap-x snap-mandatory">
+                    {itemData.photo.map((src, i) => (
+                      <div key={i} className="flex-none snap-start">
+                        <Image
+                          src={src}
+                          alt={`${itemData.company} preview ${i + 1}`}
+                          width={220}
+                          height={400}
+                          className="h-64 w-auto object-cover rounded-lg"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <Image
+                    src={itemData.photo}
+                    alt={`${itemData.company} preview`}
+                    width={600}
+                    height={400}
+                    className="w-full h-auto object-cover rounded-lg"
+                  />
+                )}
               </div>
             )}
           </div>

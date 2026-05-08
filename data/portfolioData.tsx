@@ -50,6 +50,27 @@ const portfolioData = {
   ],
   projects: [
     {
+      id: "project-6",
+      title: "",
+      company: "Sweetholic",
+      time: "December 2025",
+      skillColor: "bg-purple-500/20",
+      skills: ["Node.js", "TypeScript", "React Native", "PostgreSQL", "Expo"],
+      links: [],
+      description: `Architected and deployed Sweetholic, a social food journaling app designed for Gen Z users
+      to document favorite food spots, discover restaurants through friends, and build shareable ranked food collections.
+      Built with React Native, Expo, Node.js, TypeScript, PostgreSQL, and Supabase, featuring real-time social feeds,
+      map-based restaurant exploration, custom food lists, and geotagged multimedia posts. Developed 35+ REST endpoints
+      across authentication, posts, reactions, follows, and geolocation, integrated Google Places API for restaurant search
+      and map visualization, and validated product-market fit through beta testing with 20+ users prior to App Store launch.`,
+      photo: [
+        "/images/mishti_1.PNG",
+        "/images/mishti_2.PNG",
+        "/images/mishti_3.PNG",
+        "/images/mishti_4.PNG",
+      ],
+    },
+    {
       id: "project-1",
       title: "Mobile Board Game App",
       company: "Amongyall",
