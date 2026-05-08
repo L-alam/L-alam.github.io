@@ -10,13 +10,13 @@ const portfolioData = {
   experiences: [
     {
       id: "experience-4",
-      title: "Software Engineer",
+      title: "",
       company: "ALT - Software Engineer",
       time: "May 2026",
       skillColor: "bg-blue-500/20",
       skills: ["Flutter"],
       links: [],
-      description: `Working on a new social platform for AI generated content`,
+      description: `Working on a new social platform for AI generated content.`,
       photo: "",
     },
     {
