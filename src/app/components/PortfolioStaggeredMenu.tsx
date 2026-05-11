@@ -15,6 +15,7 @@ export interface PortfolioItem {
   links: { label: string; url: string;}[]
   description: string
   photo?: string | string[] | null
+  video?: string | null
 }
 
 export interface PortfolioStaggeredMenuProps {
@@ -81,6 +82,7 @@ export const PortfolioStaggeredMenu: React.FC<PortfolioStaggeredMenuProps> = ({
     const socialLinks = Array.from(panel.querySelectorAll(".sm-socials-link")) as HTMLElement[]
     const descriptionEl = panel.querySelector(".portfolio-description") as HTMLElement | null
     const photoEl = panel.querySelector(".portfolio-photo") as HTMLElement | null
+    const videoEl = panel.querySelector(".portfolio-video") as HTMLElement | null
     const skillsEls = Array.from(panel.querySelectorAll(".skill-bubble")) as HTMLElement[]
 
     const layerStates = layers.map((el) => ({ el, start: Number(gsap.getProperty(el, "xPercent")) }))
@@ -91,6 +93,7 @@ export const PortfolioStaggeredMenu: React.FC<PortfolioStaggeredMenuProps> = ({
     if (socialLinks.length) gsap.set(socialLinks, { y: 25, opacity: 0 })
     if (descriptionEl) gsap.set(descriptionEl, { x: 30, opacity: 0 })
     if (photoEl) gsap.set(photoEl, { x: 30, opacity: 0 })
+    if (videoEl) gsap.set(videoEl, { x: 30, opacity: 0 })
     if (skillsEls.length) gsap.set(skillsEls, { y: 25, opacity: 0 })
 
     const tl = gsap.timeline({ paused: true })
@@ -165,6 +168,10 @@ export const PortfolioStaggeredMenu: React.FC<PortfolioStaggeredMenuProps> = ({
 
     if (photoEl) {
       tl.to(photoEl, { x: 0, opacity: 1, duration: 0.4, ease: "power2.out" }, panelInsertTime + panelDuration * 0.7)
+    }
+
+    if (videoEl) {
+      tl.to(videoEl, { x: 0, opacity: 1, duration: 0.4, ease: "power2.out" }, panelInsertTime + panelDuration * 0.7)
     }
 
     openTlRef.current = tl
@@ -349,8 +356,22 @@ export const PortfolioStaggeredMenu: React.FC<PortfolioStaggeredMenuProps> = ({
               <p className="text-black text-base leading-relaxed">{itemData.description}</p>
             </div>
 
+            {/* Video - autoplay preview when provided */}
+            {itemData.video && (
+              <div className="portfolio-video mt-6">
+                <video
+                  src={itemData.video}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-auto rounded-lg"
+                />
+              </div>
+            )}
+
             {/* Photo - simple slide in */}
-            {itemData.photo && (
+            {!itemData.video && itemData.photo && (
               <div className="portfolio-photo mt-6">
                 {Array.isArray(itemData.photo) ? (
                   <div className="flex flex-row gap-3 overflow-x-auto pb-2 snap-x snap-mandatory">
