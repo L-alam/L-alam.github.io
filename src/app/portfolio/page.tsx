@@ -14,10 +14,8 @@ const portfolioData = {
       company: "ALT - Software Engineer",
       time: "May 2026",
       skillColor: "bg-blue-500/20",
-      skills: ["Flutter"],
-      links: [
-        { label: "ALT", url: "https://alternate-app.notion.site/"},
-      ],
+      skills: ["Flutter", "Image Models (nb)",],
+      links: [{ label: "About ALT", url: "https://alternate-app.notion.site/"}],
       description: `Working on a new social platform for AI generated content.`,
       photo: "",
     },
@@ -86,7 +84,6 @@ const portfolioData = {
       cross-batch failure classification to prevent the agent from getting stuck in repeated action cycles. Instrumented with LangSmith for 
       full observability across LLM calls, token usage, and cost per agent run, and containerized with Docker for portable deployment`,
       photo: [],
-      video: "/images/HarmonicAgent.mov",
     },
     { 
       id: "project-7",
