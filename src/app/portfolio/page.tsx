@@ -91,7 +91,7 @@ const portfolioData = {
       company: "GIT from Scratch (Python)",
       time: "January 2026",
       skillColor: "bg-purple-500/20",
-      skills: ["Node.js", "TypeScript", "React Native", "PostgreSQL", "Expo"],
+      skills: ["Python"],
       links: [],
       description: `Built a from-scratch reimplementation of Git's core internals in Python, replicating key commands including 
       init, hash-object, cat-file, write-tree, commit-tree, and clone. Engineered Git's content-addressed object storage model 
@@ -199,7 +199,7 @@ const portfolioData = {
       company: "Group Trip Planner",
       time: "June 2025",
       skillColor: "bg-purple-500/20",
-      skills: ["Django, Javascript, "],
+      skills: ["Django", "Javascript"],
       links: [
         { label: "Code", url: "https://github.com/L-alam/CS-412"},
       ],
@@ -350,8 +350,8 @@ export default function Portfolio() {
             key={expandedItem.id}
             position="right"
             itemData={expandedItem}
-            colors={["#CBF7ED", "#174F4F"]}
-            accentColor="#174F4F"
+            colors={["#BED7DA", "#456990"]}
+            accentColor="#456990"
             onMenuClose={handleCloseDetails}
             autoOpen={true}
             isTransitioning={isTransitioning}
