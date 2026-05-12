@@ -28,9 +28,10 @@ export default function Navigation() {
               <span className="absolute -bottom-2 left-0 w-full h-0.5 bg-white transform origin-left transition-transform duration-300"></span>
             )}
           </Link>
-          <Link 
-            href="/resume" 
-            className="text-gray-300 hover:text-white text-lg font-medium transition-all duration-300 relative" 
+          {/* Resume tab temporarily hidden — restore when ready
+          <Link
+            href="/resume"
+            className="text-gray-300 hover:text-white text-lg font-medium transition-all duration-300 relative"
             onClick={() => setActiveItem('Resume')}
           >
             Resume
@@ -38,6 +39,7 @@ export default function Navigation() {
               <span className="absolute -bottom-2 left-0 w-full h-0.5 bg-white transform origin-left transition-transform duration-300"></span>
             )}
           </Link>
+          */}
           <Link 
             href="/blog" 
             className="text-gray-300 hover:text-white text-lg font-medium transition-all duration-300 relative" 
@@ -82,16 +84,18 @@ export default function Navigation() {
               >
                 Portfolio
               </Link>
-              <Link 
-                href="/resume" 
-                className="block py-3 text-gray-300 hover:text-white text-lg font-medium transition-colors" 
-                onClick={() => { 
-                  setActiveItem('Resume'); 
-                  setIsMobileMenuOpen(false); 
+              {/* Resume tab temporarily hidden — restore when ready
+              <Link
+                href="/resume"
+                className="block py-3 text-gray-300 hover:text-white text-lg font-medium transition-colors"
+                onClick={() => {
+                  setActiveItem('Resume');
+                  setIsMobileMenuOpen(false);
                 }}
               >
                 Resume
               </Link>
+              */}
               <Link 
                 href="/blog" 
                 className="block py-3 text-gray-300 hover:text-white text-lg font-medium transition-colors" 
