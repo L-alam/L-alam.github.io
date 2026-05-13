@@ -72,7 +72,7 @@ export default function Navigation() {
         
         {/* Mobile Dropdown Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden absolute top-full left-0 right-0 bg-[#658C6E] border-t border-white/10 shadow-lg z-50">
+          <div className="md:hidden absolute top-full left-0 right-0 bg-[#456990] border-t border-white/10 shadow-lg z-50">
             <div className="py-4 px-8 space-y-1">
               <Link 
                 href="/portfolio" 

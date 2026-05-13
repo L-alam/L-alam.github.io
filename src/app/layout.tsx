@@ -26,15 +26,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <meta name="theme-color" content="#658C6E" />
+        <meta name="theme-color" content="#456990" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {/* Mobile: solid background */}
-        <div className="fixed inset-0 z-0 lg:hidden" style={{ background: '#658C6E' }} />
-        {/* Desktop: animated gradient */}
-        <div className="fixed inset-0 z-0 hidden lg:block overflow-hidden">
+        <div className="fixed inset-0 z-0 overflow-hidden">
           <Grainient
             color1="#456990"
             color2="#114B5F"
