@@ -99,6 +99,7 @@ export default function HomePage() {
                   variants={itemVariants}
                   className="flex flex-wrap items-center gap-3"
                 >
+                  {/* Resume button hidden — uncomment when ready
                   <motion.a
                     href="/assets/resume.pdf"
                     target="_blank"
@@ -110,6 +111,7 @@ export default function HomePage() {
                     <FileText size={15} />
                     <span>Resume</span>
                   </motion.a>
+                  */}
 
                   <motion.a
                     href="https://github.com/L-alam"
