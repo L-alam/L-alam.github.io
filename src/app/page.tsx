@@ -188,12 +188,13 @@ export default function HomePage() {
                 About Me
               </h2>
               <p className="text-white/90 text-base md:text-lg leading-relaxed w-full">
-                Hey, I&apos;m Labeeb! I&apos;m a computer science student at Boston University with experience
+                Hey, I&apos;m Labeeb! I&apos;m a computer science graduate from Boston University with experience
                 across full-stack development, mobile applications, and distributed systems. I&apos;ve had the
-                opportunity to work at Hyundai Autoever America optimizing support systems for connected
-                vehicles, and with Senator Ed Markey&apos;s office analyzing federal budget allocations.
+                opportunity to work at ALT, bulding new integartions for AI in social media. I've interned for 
+                Hyundai Autoever America, optimizing support systems for connected
+                vehicles. And worked for Senator Ed Markey&apos;s office analyzing federal budget allocations.
                 I&apos;m passionate about building scalable solutions for mobile games, distributed computing
-                systems, solving complex problems and creating impactful solutions.
+                systems, solving complex problems while creating impactful solutions.
               </p>
             </motion.div>
 
