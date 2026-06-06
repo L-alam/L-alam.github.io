@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import Navigation from './components/Navigation';
 import Image from 'next/image';
-import { Github, Linkedin, FileText, Calendar, ChevronRight, ChevronDown } from 'lucide-react';
+import { Github, Linkedin, ChevronRight, ChevronDown } from 'lucide-react';
 import Link from 'next/link';
 
 const containerVariants = {
@@ -190,7 +190,7 @@ export default function HomePage() {
               <p className="text-white/90 text-base md:text-lg leading-relaxed w-full">
                 Hey, I&apos;m Labeeb! I&apos;m a computer science graduate from Boston University with experience
                 across full-stack development, mobile applications, and distributed systems. I&apos;ve had the
-                opportunity to work at ALT, bulding new integartions for AI in social media. I've interned for 
+                opportunity to work at ALT, bulding new integartions for AI in social media. I&apos;ve interned for 
                 Hyundai Autoever America, optimizing support systems for connected
                 vehicles. And worked for Senator Ed Markey&apos;s office analyzing federal budget allocations.
                 I&apos;m passionate about building scalable solutions for mobile games, distributed computing
