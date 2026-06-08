@@ -37,7 +37,7 @@ const portfolioData = {
       ],
       links: [{ label: "About ALT", url: "https://alternate-app.notion.site/"}],
       description: `Worked on a social platform for AI-generated content. Contributing to platform security, user experience improvements, and a Discord integration for AI-powered communities.`,
-      photo: "",
+      photo: "/images/alt-slide.jpg",
     },
     {
       id: "experience-1",
